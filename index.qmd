@@ -1,0 +1,27 @@
+---
+title: "UQ Brush-turkey ANOVA"
+subtitle: "GitHub Pages-ready Quarto site"
+---
+
+::: {.hero}
+# UQ Brush-turkey ANOVA
+
+A teaching-demonstration slide deck for one-way ANOVA using reconstructed incubation-period data from a UQ St Lucia brush-turkey study.
+:::
+
+<div class="card-grid">
+  <a class="card-link" href="Chapter%20Slides/uq-brushturkey-anova.html">
+    <h3>Open the teaching demonstration slides</h3>
+    <p>Reveal.js slides that advance one-by-one and include interactive browser-run R cells.</p>
+  </a>
+  <a class="card-link" href="Chapter%20Landing%20Pages/brush-turkey-anova.html">
+    <h3>Open the chapter landing page</h3>
+    <p>Overview, learning goals, and resource links.</p>
+  </a>
+</div>
+
+## Source files
+
+- [CSV dataset](data/brushturkey_incubation.csv)
+- [R analysis script](R/brushturkey_anova.R)
+- [Reconstruction notes](data/RECONSTRUCTION_NOTES.md)

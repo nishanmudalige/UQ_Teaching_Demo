@@ -1,0 +1,24 @@
+---
+title: "One-way ANOVA: Brush-turkey incubation"
+---
+
+# One-way ANOVA: Brush-turkey incubation
+
+This chapter demonstrates one-way ANOVA using incubation-period data from Australian Brush-turkey eggs connected to the University of Queensland St Lucia campus.
+
+<div class="card-grid">
+  <a class="card-link" href="../Chapter%20Slides/uq-brushturkey-anova.html">
+    <h3>Slides</h3>
+    <p>Open the interactive teaching demonstration.</p>
+  </a>
+  <a class="card-link" href="../data/brushturkey_incubation.csv">
+    <h3>Dataset</h3>
+    <p>Download the CSV used by the live R cells.</p>
+  </a>
+</div>
+
+## Learning goals
+
+By the end, students should be able to identify the response and factor, interpret an ANOVA table, use post hoc comparisons, and check assumptions using reproducible R code.
+
+<a class="home-button" href="../index.html">Back to home</a>

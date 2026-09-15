@@ -1,0 +1,218 @@
+---
+pagetitle: "One-way ANOVA with a UQ Brush-turkey Study"
+title: "One-way ANOVA with a UQ Brush-turkey Study"
+subtitle: "20--25 minute teaching demonstration using reconstructed incubation-period data"
+author: "Nishan Mudalige"
+engine: knitr
+format:
+  live-revealjs:
+    theme: simple
+    transition: slide
+    slide-number: true
+    toc: false
+    chalkboard: true
+    footer: "Teaching demonstration | One-way ANOVA"
+    pdf-separate-fragments: false
+    html-math-method: mathjax
+    code-copy: true
+    code-fold: false
+    incremental: false
+    width: 1280
+    height: 720
+    margin: 0.055
+    center: false
+webr:
+  packages: []
+  resources:
+    - ../data/brushturkey_incubation.csv
+live:
+  show-solutions: true
+execute:
+  freeze: auto
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+# One-way ANOVA with a UQ Brush-turkey Study {.title-slide}
+
+## Teaching demonstration
+
+Does incubation temperature change the average time until hatching for Australian Brush-turkey eggs?
+
+![](../images/brush_turkey_scene.png){width="48%"}
+
+---
+
+## Research context and UQ connection
+
+- Study: Eiby and Booth (2009), *Journal of Comparative Physiology B*.
+- Authors: Yvonne A. Eiby and David T. Booth, School of Biological Sciences, The University of Queensland.
+- Eggs came from brush-turkeys breeding on UQ's St Lucia campus.
+
+Reference: Eiby, Y. A., & Booth, D. T. (2009). The effects of incubation temperature on the morphology and composition of Australian Brush-turkey (*Alectura lathami*) chicks. *Journal of Comparative Physiology B*, 179, 875--882. https://doi.org/10.1007/s00360-009-0370-4
+
+---
+
+## Data provenance
+
+The data are reconstructed integer incubation periods that reproduce the published group means and standard errors. The per-egg values are not the authors' original observations.
+
+---
+
+## Load the CSV
+
+```{webr}
+csv_paths <- c(
+  "brushturkey_incubation.csv",
+  "data/brushturkey_incubation.csv",
+  "../data/brushturkey_incubation.csv"
+)
+csv_path <- csv_paths[file.exists(csv_paths)][1]
+bt <- read.csv(csv_path)
+bt$temperature <- factor(bt$temperature, levels = c(32, 34, 36))
+
+head(bt)
+table(bt$temperature)
+```
+
+---
+
+## Plotly boxplots: no points, no zoom
+
+The boxplot below is drawn with Plotly in the browser. It shows only boxes and whiskers; individual points are hidden and zoom/crop controls are disabled.
+
+<div id="bt-plotly-boxplot" class="plotly-chart"></div>
+
+<script>
+(function(){
+  function loadPlotly(callback) {
+    if (window.Plotly) { callback(); return; }
+    const script = document.createElement("script");
+    script.src = "https://cdn.plot.ly/plotly-2.25.2.min.js";
+    script.onload = callback;
+    document.head.appendChild(script);
+  }
+  function parseCsv(text) {
+    const lines = text.trim().split(/\r?\n/);
+    const header = lines.shift().split(",");
+    return lines.map(line => {
+      const parts = line.split(",");
+      const row = {};
+      header.forEach((h, i) => row[h] = parts[i]);
+      row.temperature = Number(row.temperature);
+      row.incubation_period = Number(row.incubation_period);
+      return row;
+    });
+  }
+  async function drawBrushTurkeyBoxplot() {
+    const div = document.getElementById("bt-plotly-boxplot");
+    if (!div) return;
+    const response = await fetch("../data/brushturkey_incubation.csv");
+    const rows = parseCsv(await response.text());
+    const temps = [32, 34, 36];
+    const traces = temps.map(t => ({
+      type: "box",
+      name: t + " °C",
+      y: rows.filter(d => d.temperature === t).map(d => d.incubation_period),
+      boxpoints: false,
+      hoverinfo: "y+name",
+      line: { width: 2 },
+      marker: { opacity: 0 }
+    }));
+    const layout = {
+      margin: { l: 72, r: 22, t: 18, b: 64 },
+      paper_bgcolor: "white",
+      plot_bgcolor: "white",
+      dragmode: false,
+      xaxis: { title: "Incubation temperature (°C)", fixedrange: true, zeroline: false },
+      yaxis: { title: "Incubation period (days)", fixedrange: true, zeroline: false, range: [40, 55] },
+      showlegend: false
+    };
+    const config = {
+      displayModeBar: false,
+      scrollZoom: false,
+      doubleClick: false,
+      responsive: true
+    };
+    Plotly.newPlot(div, traces, layout, config);
+  }
+  document.addEventListener("DOMContentLoaded", function(){ loadPlotly(drawBrushTurkeyBoxplot); });
+})();
+</script>
+
+```{webr}
+csv_paths <- c(
+  "brushturkey_incubation.csv",
+  "data/brushturkey_incubation.csv",
+  "../data/brushturkey_incubation.csv"
+)
+csv_path <- csv_paths[file.exists(csv_paths)][1]
+bt <- read.csv(csv_path)
+bt$temperature <- factor(bt$temperature, levels = c(32, 34, 36))
+
+aggregate(incubation_period ~ temperature, data = bt, summary)
+```
+
+---
+
+## One-way ANOVA
+
+```{webr}
+csv_paths <- c(
+  "brushturkey_incubation.csv",
+  "data/brushturkey_incubation.csv",
+  "../data/brushturkey_incubation.csv"
+)
+csv_path <- csv_paths[file.exists(csv_paths)][1]
+bt <- read.csv(csv_path)
+bt$temperature <- factor(bt$temperature, levels = c(32, 34, 36))
+
+fit <- aov(incubation_period ~ temperature, data = bt)
+summary(fit)
+```
+
+---
+
+## Post hoc comparisons
+
+```{webr}
+csv_paths <- c(
+  "brushturkey_incubation.csv",
+  "data/brushturkey_incubation.csv",
+  "../data/brushturkey_incubation.csv"
+)
+csv_path <- csv_paths[file.exists(csv_paths)][1]
+bt <- read.csv(csv_path)
+bt$temperature <- factor(bt$temperature, levels = c(32, 34, 36))
+fit <- aov(incubation_period ~ temperature, data = bt)
+
+TukeyHSD(fit)
+```
+
+---
+
+## Assumption and robustness checks
+
+```{webr}
+csv_paths <- c(
+  "brushturkey_incubation.csv",
+  "data/brushturkey_incubation.csv",
+  "../data/brushturkey_incubation.csv"
+)
+csv_path <- csv_paths[file.exists(csv_paths)][1]
+bt <- read.csv(csv_path)
+bt$temperature <- factor(bt$temperature, levels = c(32, 34, 36))
+fit <- aov(incubation_period ~ temperature, data = bt)
+
+shapiro.test(residuals(fit))
+oneway.test(incubation_period ~ temperature, data = bt, var.equal = FALSE)
+kruskal.test(incubation_period ~ temperature, data = bt)
+```
+
+---
+
+## Takeaway
+
+The ANOVA shows strong evidence that mean incubation period differs by temperature. The main practical difference is between 32 °C and the two warmer groups.
+
+[Back to home](../index.html)

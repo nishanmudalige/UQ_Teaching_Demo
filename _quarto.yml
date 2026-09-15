@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - "Chapter Landing Pages/*.qmd"
+    - "Chapter Slides/*.qmd"
+  resources:
+    - data/
+    - images/
+    - R/
+    - .nojekyll
+
+website:
+  title: "UQ Brush-turkey ANOVA"
+  site-url: "https://nishanmudalige.github.io/UQ_BrushTurkey_ANOVA"
+  search: false
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: Chapter Landing Pages/brush-turkey-anova.qmd
+        text: Chapter page
+      - href: Chapter Slides/uq-brushturkey-anova.qmd
+        text: Slides
+      - href: data/brushturkey_incubation.csv
+        text: Data
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: false
+    code-fold: true
+    format-links: false
+    include-in-header: mobile-zoom.html

@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "UQ Brush-turkey ANOVA",
+    "section": "",
+    "text": "A teaching-demonstration slide deck for one-way ANOVA using reconstructed incubation-period data from a UQ St Lucia brush-turkey study."
+  },
+  {
+    "objectID": "index.html#source-files",
+    "href": "index.html#source-files",
+    "title": "UQ Brush-turkey ANOVA",
+    "section": "Source files",
+    "text": "Source files\n\nCSV dataset\nR analysis script\nReconstruction notes"
+  }
+]
