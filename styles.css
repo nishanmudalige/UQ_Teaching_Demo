@@ -1047,3 +1047,211 @@ a { color: #00796B; }
   padding: 3px 6px;
   border-radius: 5px;
 }
+
+
+/* ==============================================================
+   FINAL SLIDE NORMALIZATION (agent + browser R revision)
+   ============================================================== */
+
+/* Keep the 1280x720 slide canvas predictable. */
+.reveal .slides section.slide {
+  padding: 8px 28px 12px 28px !important;
+  overflow: visible;
+}
+.reveal .slides section.slide > h2 {
+  margin: 0 0 9px 0 !important;
+  font-size: 1.30em !important;
+  line-height: 1.08 !important;
+}
+
+/* Readable baseline for ordinary slide prose; specialized compact slides can
+   still override this through their more specific selectors above. */
+.reveal .slides section.slide > p,
+.reveal .slides section.slide > ul,
+.reveal .slides section.slide > ol {
+  max-width: 100%;
+}
+
+/* Browser-R cells */
+.reveal .live-r-cell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+  max-height: 555px;
+  overflow: hidden;
+}
+.reveal .live-r-toolbar {
+  flex: 0 0 auto;
+  min-height: 43px;
+  padding: 7px 10px;
+}
+.reveal .live-r-toolbar button {
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.reveal .live-r-toolbar button:disabled {
+  opacity: 0.62;
+  cursor: wait;
+}
+.reveal .live-r-status {
+  font-size: 12px !important;
+  line-height: 1.2;
+}
+.reveal .live-r-code {
+  flex: 0 0 auto;
+  min-height: 150px;
+  height: 190px;
+  resize: vertical;
+  padding: 10px 12px;
+  font-size: 14px !important;
+  line-height: 1.24 !important;
+  tab-size: 2;
+}
+.reveal .live-r-output {
+  flex: 1 1 auto;
+  min-height: 70px;
+  max-height: 285px;
+  overflow: auto;
+  padding: 10px 12px;
+  font-size: 12.5px !important;
+  line-height: 1.25;
+  white-space: pre-wrap;
+}
+.reveal .live-r-text-result {
+  margin: 0;
+  padding: 0 0 8px 0;
+  max-height: 105px;
+  overflow: auto;
+  font: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
+  background: transparent;
+  border: 0;
+}
+.reveal .live-r-output-with-plot {
+  max-height: 330px;
+  white-space: normal;
+}
+.reveal .live-r-generated-plot {
+  width: 100%;
+  height: 215px;
+  min-height: 215px;
+}
+.reveal #cell-box .live-r-code,
+.reveal #cell-pvalue .live-r-code {
+  height: 145px;
+  min-height: 125px;
+}
+.reveal #cell-box .live-r-output,
+.reveal #cell-pvalue .live-r-output {
+  max-height: 335px;
+}
+
+/* The equal-variance activity was designed as three simultaneous views:
+   visual evidence | numerical evidence | AI interpretation. */
+.reveal .eqvar-slide {
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+}
+.reveal .eqvar-slide h2 {
+  margin-bottom: 8px !important;
+}
+.reveal .eqvar-layout {
+  width: 100%;
+  height: 590px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+.reveal .eqvar-panel {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  border: 1px solid var(--uq-code-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 5px rgba(81,36,122,0.10);
+}
+.reveal .eqvar-blue,
+.reveal .eqvar-red,
+.reveal .eqvar-green {
+  grid-column: auto;
+  grid-row: 1;
+}
+.reveal .eqvar-plotly {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.reveal .eqvar-live-cell {
+  height: 100%;
+  max-height: none !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.reveal .eqvar-live-code {
+  flex: 1 1 58%;
+  min-height: 0 !important;
+  height: auto !important;
+  resize: none;
+  font-size: 12.5px !important;
+  line-height: 1.18 !important;
+}
+.reveal .eqvar-live-output {
+  flex: 1 1 42%;
+  min-height: 0;
+  max-height: none !important;
+  overflow: auto;
+  font-size: 11.5px !important;
+}
+.reveal .eqvar-green iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff;
+}
+.reveal .plot-load-error {
+  padding: 18px;
+  color: var(--uq-purple);
+  font-size: 14px;
+}
+
+/* Correct sizing for the overall-variation slide now that its class is
+   properly attached in the QMD. */
+.reveal .overall-variation-slide {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+.reveal .overall-variation-slide .overall-variation-layout {
+  width: 100%;
+}
+
+/* Small screens: stack the three activity panels and allow vertical scrolling. */
+@media screen and (max-width: 900px) {
+  .reveal .eqvar-slide {
+    overflow-y: auto !important;
+  }
+  .reveal .eqvar-layout {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: 330px 430px 520px;
+    gap: 14px;
+  }
+  .reveal .eqvar-blue,
+  .reveal .eqvar-red,
+  .reveal .eqvar-green {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}

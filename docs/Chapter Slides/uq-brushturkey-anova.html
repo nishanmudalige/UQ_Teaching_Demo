@@ -7,8 +7,7 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Nishan Mudalige">
@@ -126,8 +125,6 @@
       margin-right: 0; 
     }
   </style>
-  <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-  <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -230,7 +227,7 @@ Nishan Mudalige
 <p>The model assumes independent errors, approximate normality within groups, and a common variance across groups.</p>
 </div>
 </section>
-<section id="overall-mean-and-sources-of-variation-.compact-theory-overall-variation-slide" class="slide level2">
+<section id="overall-mean-and-sources-of-variation" class="slide level2 compact-theory overall-variation-slide">
 <h2>Overall mean and sources of variation {.compact-theory overall-variation-slide}</h2>
 <div class="overall-variation-layout">
 <div class="overall-table-top">
@@ -523,7 +520,7 @@ summary_stats</textarea>
   </div>
 
 <div class="eqvar-panel eqvar-green">
-  <iframe src="https://anova-agent.onrender.com/" title="ANOVA Assistant" style="
+  <iframe id="anova-agent-frame" src="https://anova-agent.onrender.com/" title="ANOVA Assistant" style="
       width: 100%;
       height: 100%;
       border: none;
@@ -573,85 +570,35 @@ kruskal.test(incubation_days ~ temperature, data = brush_turkey)</textarea><div 
 <div class="home-button-row">
 <p><a href="../index.html" class="home-button">Back to home</a></p>
 </div>
-<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"></script>
-<style>
-/* ChatKit panel on the equal-variance slide */
-.eqvar-chatkit-shell {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-#eqvar-chatkit {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  flex: 1 1 auto;
-}
-
-.eqvar-chatkit-error {
-  box-sizing: border-box;
-  padding: 10px 12px;
-  margin: 8px;
-  border: 1px solid #b3261e;
-  border-radius: 8px;
-  background: #fff2f0;
-  color: #7a1a14;
-  font-size: 12px;
-  line-height: 1.3;
-}
-</style>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
 <script>
-function drawStaticFPlot(id, fValue, df1, df2, label){
-  const div = document.getElementById(id);
-  if(!div || typeof Plotly === 'undefined' || typeof jStat === 'undefined') return;
-  const xMax = Math.max(6, Math.min(55, fValue * 1.25));
-  const n = 700, x = [], y = [], sx = [], sy = [];
-  for(let i=0;i<n;i++){
-    const xx = 0.0001 + i*(xMax-0.0001)/(n-1);
-    const yy = jStat.centralF.pdf(xx, df1, df2);
-    x.push(xx); y.push(yy);
-    if(xx >= fValue){ sx.push(xx); sy.push(yy); }
-  }
-  const data = [
-    {x: sx.length?[sx[0], ...sx, sx[sx.length-1]]:[], y: sy.length?[0, ...sy, 0]:[], type:'scatter', mode:'lines', fill:'toself', fillcolor:'rgba(81,36,122,0.30)', line:{color:'rgba(81,36,122,0)'}, hoverinfo:'skip', name:'p-value'},
-    {x, y, type:'scatter', mode:'lines', line:{color:'#2F3437', width:3}, hoverinfo:'skip', name:'F density'},
-    {x:[fValue,fValue], y:[0,jStat.centralF.pdf(fValue,df1,df2)], type:'scatter', mode:'lines', line:{color:'#51247A', width:3, dash:'dash'}, hoverinfo:'skip', showlegend:false}
-  ];
-  const layout = {margin:{l:58,r:15,t:12,b:48}, paper_bgcolor:'white', plot_bgcolor:'white', dragmode:false,
-    xaxis:{title:'F', range:[0,xMax], fixedrange:true, zeroline:false, gridcolor:'#ece6f3'},
-    yaxis:{title:'Density', fixedrange:true, rangemode:'tozero', gridcolor:'#ece6f3'},
-    annotations:[{xref:'paper', yref:'paper', x:0.74, y:0.62, text:label || 'right-tail p-value', showarrow:false, font:{size:14, color:'#2F3437'}}],
-    showlegend:false, font:{family:'Arial, Helvetica, sans-serif', color:'#2F3437'}};
-  Plotly.react(div, data, layout, {displayModeBar:false, scrollZoom:false, doubleClick:false, responsive:true, staticPlot:true});
-}
-
-
+/* ---------- Shared data helpers ---------- */
+let brushTurkeyCsvTextCache = null;
 let brushTurkeyCsvRowsCache = null;
-async function getCsvRows(){
-  if(brushTurkeyCsvRowsCache) return brushTurkeyCsvRowsCache;
+
+async function fetchBrushTurkeyCsvText(){
+  if (brushTurkeyCsvTextCache) return brushTurkeyCsvTextCache;
   const paths = [
     '../data/brushturkey_incubation.csv',
     './data/brushturkey_incubation.csv',
     'data/brushturkey_incubation.csv'
   ];
-  let csvText = null;
-  for(const path of paths){
+  for (const path of paths){
     try {
       const response = await fetch(path, {cache: 'no-store'});
-      if(response.ok){
-        csvText = await response.text();
-        break;
+      if (response.ok){
+        brushTurkeyCsvTextCache = await response.text();
+        return brushTurkeyCsvTextCache;
       }
     } catch (e) {}
   }
-  if(!csvText) throw new Error('Could not load brushturkey_incubation.csv');
+  throw new Error('Could not load brushturkey_incubation.csv');
+}
+
+async function getCsvRows(){
+  if (brushTurkeyCsvRowsCache) return brushTurkeyCsvRowsCache;
+  const csvText = await fetchBrushTurkeyCsvText();
   const lines = csvText.trim().split(/\r?\n/).filter(Boolean);
   const headers = lines[0].split(',').map(s => s.trim());
   brushTurkeyCsvRowsCache = lines.slice(1).map(line => {
@@ -666,133 +613,398 @@ async function getCsvRows(){
   return brushTurkeyCsvRowsCache;
 }
 
-async function drawEqVarBoxplot(){
-  const div = document.getElementById('eqvar-plotly-boxplot');
+/* ---------- Plotly helpers ---------- */
+function drawStaticFPlot(target, fValue, df1, df2, label){
+  const div = typeof target === 'string' ? document.getElementById(target) : target;
+  if(!div || typeof Plotly === 'undefined' || typeof jStat === 'undefined') return;
+  const xMax = Math.max(6, Math.min(55, fValue * 1.25));
+  const n = 700, x = [], y = [], sx = [], sy = [];
+  for(let i=0;i<n;i++){
+    const xx = 0.0001 + i*(xMax-0.0001)/(n-1);
+    const yy = jStat.centralF.pdf(xx, df1, df2);
+    x.push(xx); y.push(yy);
+    if(xx >= fValue){ sx.push(xx); sy.push(yy); }
+  }
+  const data = [
+    {x: sx.length?[sx[0], ...sx, sx[sx.length-1]]:[], y: sy.length?[0, ...sy, 0]:[], type:'scatter', mode:'lines', fill:'toself', fillcolor:'rgba(81,36,122,0.30)', line:{color:'rgba(81,36,122,0)'}, hoverinfo:'skip', name:'p-value'},
+    {x, y, type:'scatter', mode:'lines', line:{color:'#2F3437', width:3}, hoverinfo:'skip', name:'F density'},
+    {x:[fValue,fValue], y:[0,jStat.centralF.pdf(fValue,df1,df2)], type:'scatter', mode:'lines', line:{color:'#51247A', width:3, dash:'dash'}, hoverinfo:'skip', showlegend:false}
+  ];
+  const layout = {
+    margin:{l:52,r:12,t:8,b:42}, paper_bgcolor:'white', plot_bgcolor:'white', dragmode:false,
+    xaxis:{title:'F', range:[0,xMax], fixedrange:true, zeroline:false, gridcolor:'#ece6f3'},
+    yaxis:{title:'Density', fixedrange:true, rangemode:'tozero', gridcolor:'#ece6f3'},
+    annotations:[{xref:'paper', yref:'paper', x:0.73, y:0.66, text:label || 'right-tail p-value', showarrow:false, font:{size:13, color:'#2F3437'}}],
+    showlegend:false, font:{family:'Arial, Helvetica, sans-serif', color:'#2F3437', size:12}
+  };
+  Plotly.react(div, data, layout, {displayModeBar:false, scrollZoom:false, doubleClick:false, responsive:true, staticPlot:true});
+}
+
+async function drawBrushTurkeyBoxplot(target){
+  const div = typeof target === 'string' ? document.getElementById(target) : target;
   if(!div || typeof Plotly === 'undefined') return;
   const rows = await getCsvRows();
   const temps = [32, 34, 36];
   const traces = temps.map(t => ({
-    type: 'box',
-    name: t + ' °C',
-    y: rows.filter(d => d.temperature === t).map(d => d.incubation_period),
-    boxpoints: false,
-    hoverinfo: 'skip',
-    line: {width: 2, color: '#51247A'},
-    fillcolor: 'rgba(237,231,246,0.82)',
-    marker: {opacity: 0}
+    type:'box', name:t + ' °C',
+    y:rows.filter(d => d.temperature === t).map(d => d.incubation_period),
+    boxpoints:false, hoverinfo:'skip',
+    line:{width:2, color:'#51247A'},
+    fillcolor:'rgba(237,231,246,0.82)', marker:{opacity:0}
   }));
   const layout = {
-    margin: {l: 52, r: 12, t: 12, b: 48},
-    paper_bgcolor: 'white',
-    plot_bgcolor: 'white',
-    dragmode: false,
-    xaxis: {title: 'Temperature (°C)', fixedrange: true, zeroline: false, gridcolor: '#ece6f3'},
-    yaxis: {title: 'Incubation days', fixedrange: true, zeroline: false, range: [40, 55], gridcolor: '#ece6f3'},
-    showlegend: false,
-    font: {family: 'Arial, Helvetica, sans-serif', color: '#2F3437', size: 12}
+    margin:{l:50,r:10,t:8,b:42}, paper_bgcolor:'white', plot_bgcolor:'white', dragmode:false,
+    xaxis:{title:'Temperature (°C)', fixedrange:true, zeroline:false, gridcolor:'#ece6f3'},
+    yaxis:{title:'Incubation days', fixedrange:true, zeroline:false, gridcolor:'#ece6f3'},
+    showlegend:false,
+    font:{family:'Arial, Helvetica, sans-serif', color:'#2F3437', size:12}
   };
-  Plotly.newPlot(div, traces, layout, {displayModeBar: false, scrollZoom: false, doubleClick: false, responsive: true, staticPlot: true});
+  Plotly.react(div, traces, layout, {displayModeBar:false, scrollZoom:false, doubleClick:false, responsive:true, staticPlot:true});
 }
 
-// ChatKit configuration for local development.
-// When you deploy the slides, replace these two values with your deployed
-// HTTPS backend URL and the production domain key from the OpenAI dashboard.
-const EQVAR_CHATKIT_API_URL = 'http://127.0.0.1:8000/chatkit';
-const EQVAR_CHATKIT_DOMAIN_KEY = 'domain_pk_localhost_dev';
 
-async function initEqVarChatKit(){
-  const chatkit = document.getElementById('eqvar-chatkit');
-  if(!chatkit || chatkit.dataset.initialized === 'true') return;
+/* ---------- Page context for the hosted ANOVA agent ----------
+   The Render agent cannot directly read a localhost/GitHub Pages parent page
+   because it is cross-origin. Instead, the slide sends a structured snapshot
+   of the current activity to the iframe with window.postMessage().
 
-  const errorBox = document.getElementById('eqvar-chatkit-error');
+   For the boxplot, we send the exact raw observations plus the numerical
+   geometry of the displayed boxplots (quartiles, median, whiskers, outliers).
+   This is more reliable for statistical reasoning than estimating values from
+   pixels, while still representing the plot the student is viewing. */
+const ANOVA_AGENT_ORIGIN = 'https://anova-agent.onrender.com';
+
+function meanValue(values){
+  if (!values.length) return null;
+  return values.reduce((sum, x) => sum + x, 0) / values.length;
+}
+
+function sampleSD(values){
+  if (values.length < 2) return null;
+  const m = meanValue(values);
+  const ss = values.reduce((sum, x) => sum + Math.pow(x - m, 2), 0);
+  return Math.sqrt(ss / (values.length - 1));
+}
+
+function quantileLinear(values, p){
+  if (!values.length) return null;
+  const x = [...values].sort((a, b) => a - b);
+  if (x.length === 1) return x[0];
+  const h = (x.length - 1) * p;
+  const lo = Math.floor(h);
+  const hi = Math.ceil(h);
+  if (lo === hi) return x[lo];
+  return x[lo] + (h - lo) * (x[hi] - x[lo]);
+}
+
+function boxplotSummary(values){
+  const x = [...values].sort((a, b) => a - b);
+  if (!x.length) return null;
+
+  const q1 = quantileLinear(x, 0.25);
+  const median = quantileLinear(x, 0.50);
+  const q3 = quantileLinear(x, 0.75);
+  const iqr = q3 - q1;
+  const lowerFence = q1 - 1.5 * iqr;
+  const upperFence = q3 + 1.5 * iqr;
+  const nonOutliers = x.filter(v => v >= lowerFence && v <= upperFence);
+  const outliers = x.filter(v => v < lowerFence || v > upperFence);
+
+  return {
+    minimum: x[0],
+    q1,
+    median,
+    q3,
+    maximum: x[x.length - 1],
+    iqr,
+    lower_fence: lowerFence,
+    upper_fence: upperFence,
+    lower_whisker: nonOutliers.length ? nonOutliers[0] : null,
+    upper_whisker: nonOutliers.length ? nonOutliers[nonOutliers.length - 1] : null,
+    outliers
+  };
+}
+
+function getEqVarSlideText(){
+  const frame = document.getElementById('anova-agent-frame');
+  const slide = frame?.closest('section');
+  if (!slide) return '';
+
+  const clone = slide.cloneNode(true);
+  clone.querySelectorAll('iframe, script, style').forEach(el => el.remove());
+
+  return (clone.innerText || clone.textContent || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+async function buildEqVarContext(){
+  const rows = await getCsvRows();
+  const temperatures = [32, 34, 36];
+
+  const groups = temperatures.map(temp => {
+    const values = rows
+      .filter(d => d.temperature === temp)
+      .map(d => d.incubation_period);
+
+    return {
+      temperature_c: temp,
+      n: values.length,
+      mean_days: meanValue(values),
+      sample_sd_days: sampleSD(values),
+      observations_days: values,
+      boxplot: boxplotSummary(values)
+    };
+  });
+
+  const rCode = document.querySelector('#cell-eqvar .live-r-code')?.value || '';
+  const rOutput = document.getElementById('output-eqvar')?.innerText || '';
+
+  return {
+    schema_version: 1,
+    source: 'UQ Brush-turkey ANOVA Quarto/RevealJS slide',
+    page: {
+      title: document.title,
+      url: window.location.href,
+      slide_id: 'is-equal-variance-assumption-satisfied',
+      slide_title: 'Is Equal variance Assumption Satisfied'
+    },
+    visible_slide_text: getEqVarSlideText(),
+    activity: {
+      statistical_method: 'one-way ANOVA',
+      question: 'Assess whether the equal variance assumption is reasonable for incubation period across the 32 C, 34 C, and 36 C temperature groups.',
+      response_variable: 'incubation period (days)',
+      group_variable: 'incubation temperature (degrees Celsius)'
+    },
+    dataset: {
+      name: 'brushturkey_incubation.csv',
+      row_count: rows.length,
+      rows: rows
+    },
+    displayed_plot: {
+      type: 'Plotly boxplot',
+      x_axis: 'Temperature (degrees Celsius)',
+      y_axis: 'Incubation days',
+      note: 'The following boxplot summaries are computed from the exact observations used to draw the boxplots. They represent the statistical geometry of the displayed plot.',
+      groups: groups.map(g => ({
+        temperature_c: g.temperature_c,
+        boxplot: g.boxplot
+      }))
+    },
+    group_summaries: groups.map(g => ({
+      temperature_c: g.temperature_c,
+      n: g.n,
+      mean_days: g.mean_days,
+      sample_sd_days: g.sample_sd_days
+    })),
+    current_r_code: rCode,
+    current_r_output: rOutput
+  };
+}
+
+async function sendEqVarContextToAgent(){
+  const iframe = document.getElementById('anova-agent-frame');
+  if (!iframe || !iframe.contentWindow) return;
 
   try {
-    // The CDN registers <openai-chatkit> as a custom element.
-    await customElements.whenDefined('openai-chatkit');
-
-    chatkit.setOptions({
-      api: {
-        url: EQVAR_CHATKIT_API_URL,
-        domainKey: EQVAR_CHATKIT_DOMAIN_KEY
+    const context = await buildEqVarContext();
+    iframe.contentWindow.postMessage(
+      {
+        type: 'ANOVA_PAGE_CONTEXT',
+        context
       },
-      theme: {
-        colorScheme: 'light',
-        density: 'compact',
-        radius: 'round',
-        color: {
-          accent: {
-            primary: '#51247A',
-            level: 1
-          }
-        }
-      },
-      header: {
-        title: { enabled: false }
-      },
-      startScreen: {
-        greeting: 'Ask the ANOVA tutor about equal variance',
-        prompts: [
-          {
-            label: 'How do I assess equal variance?',
-            prompt: 'How should I use the boxplots and group standard deviations on this slide to assess the equal-variance assumption for one-way ANOVA?'
-          },
-          {
-            label: 'What counts as similar SDs?',
-            prompt: 'When checking the equal-variance assumption for one-way ANOVA, how similar should the group standard deviations be?'
-          }
-        ]
-      },
-      composer: {
-        placeholder: 'Ask about the boxplots, SDs, or ANOVA assumption...'
-      },
-      threadItemActions: {
-        feedback: false
-      },
-      onError: ({ error }) => {
-        console.error('ChatKit error:', error);
-        if(errorBox){
-          errorBox.hidden = false;
-          errorBox.textContent = 'ChatKit could not connect. Make sure the local backend is running at ' + EQVAR_CHATKIT_API_URL + '.';
-        }
-      },
-      onReady: () => {
-        if(errorBox) errorBox.hidden = true;
-      }
-    });
-
-    chatkit.dataset.initialized = 'true';
+      ANOVA_AGENT_ORIGIN
+    );
+    iframe.dataset.contextSent = 'true';
   } catch (error) {
-    console.error('Unable to initialize ChatKit:', error);
-    if(errorBox){
-      errorBox.hidden = false;
-      errorBox.textContent = 'Unable to initialize ChatKit. Check the browser console and confirm the ChatKit CDN is reachable.';
-    }
+    console.error('Unable to send ANOVA page context to agent:', error);
   }
 }
 
+/* The hosted agent frontend sends ANOVA_AGENT_READY after its message listener
+   is active. This handshake avoids a race where the parent posts before the
+   iframe JavaScript is ready. */
+window.addEventListener('message', event => {
+  if (event.origin !== ANOVA_AGENT_ORIGIN) return;
+  if (event.data?.type === 'ANOVA_AGENT_READY') {
+    sendEqVarContextToAgent();
+  }
+});
+
+/* ---------- Browser R runner ----------
+   Uses the PostMessage channel so the slides work on GitHub Pages without
+   requiring cross-origin-isolation response headers. */
+let uqWebRPromise = null;
+
+function setAllRStatuses(text){
+  document.querySelectorAll('.live-r-status').forEach(el => {
+    if (!el.closest('.live-r-cell')?.classList.contains('r-running')) el.textContent = text;
+  });
+}
+
+async function getUqWebR(){
+  if (!uqWebRPromise){
+    uqWebRPromise = (async () => {
+      setAllRStatuses('Loading R in the browser…');
+      const { WebR, ChannelType } = await import('https://webr.r-wasm.org/latest/webr.mjs');
+      const webR = new WebR({ channelType: ChannelType.PostMessage });
+      await webR.init();
+      const csvText = await fetchBrushTurkeyCsvText();
+      await webR.FS.writeFile(
+        'brushturkey_incubation.csv',
+        new TextEncoder().encode(csvText)
+      );
+      setAllRStatuses('R is ready. Edit the code and click Run code.');
+      return webR;
+    })().catch(err => {
+      uqWebRPromise = null;
+      setAllRStatuses('R failed to load. Check your internet connection.');
+      throw err;
+    });
+  }
+  return uqWebRPromise;
+}
+
+async function evaluateRCodeToText(webR, userCode){
+  const helper = `local({
+    .expr <- parse(text = user_code)
+    .warnings <- character()
+    .out <- withCallingHandlers(
+      capture.output({
+        for (.i in seq_along(.expr)) {
+          .ans <- withVisible(eval(.expr[[.i]], envir = .GlobalEnv))
+          if (.ans$visible) print(.ans$value)
+        }
+      }),
+      warning = function(w) {
+        .warnings <<- c(.warnings, conditionMessage(w))
+        invokeRestart("muffleWarning")
+      }
+    )
+    if (length(.warnings)) .out <- c(.out, paste0("Warning: ", .warnings))
+    paste(.out, collapse = "\\n")
+  })`;
+  return await webR.evalRString(helper, {
+    env: { user_code: userCode },
+    captureGraphics: false,
+    withAutoprint: false
+  });
+}
+
+function outputTextBlock(text){
+  const pre = document.createElement('pre');
+  pre.className = 'live-r-text-result';
+  pre.textContent = text || 'Code ran successfully.';
+  return pre;
+}
+
+async function renderBoxplotRunOutput(output, text){
+  output.replaceChildren();
+  output.classList.add('live-r-output-with-plot');
+  output.appendChild(outputTextBlock(text));
+  const plot = document.createElement('div');
+  plot.className = 'live-r-generated-plot';
+  output.appendChild(plot);
+  await drawBrushTurkeyBoxplot(plot);
+}
+
+async function renderPValueRunOutput(output, text, webR){
+  output.replaceChildren();
+  output.classList.add('live-r-output-with-plot');
+  output.appendChild(outputTextBlock(text));
+  const plot = document.createElement('div');
+  plot.className = 'live-r-generated-plot';
+  output.appendChild(plot);
+  try {
+    const fValue = await webR.evalRNumber('as.numeric(F_star)');
+    const df1 = await webR.evalRNumber('as.numeric(df1)');
+    const df2 = await webR.evalRNumber('as.numeric(df2)');
+    const pValue = await webR.evalRNumber('as.numeric(p_value)');
+    drawStaticFPlot(plot, fValue, df1, df2, 'p-value = ' + pValue.toExponential(3));
+  } catch (e) {
+    plot.remove();
+  }
+}
+
+window.runLiveRCell = async function(id){
+  const cell = document.getElementById('cell-' + id);
+  const output = document.getElementById('output-' + id);
+  if (!cell || !output) return;
+
+  const code = cell.querySelector('.live-r-code')?.value || '';
+  const status = cell.querySelector('.live-r-status');
+  const button = cell.querySelector('.live-r-toolbar button');
+  const mode = cell.dataset.mode || '';
+
+  cell.classList.add('r-running');
+  output.classList.remove('live-r-output-with-plot');
+  output.textContent = 'Starting R…';
+  if (status) status.textContent = 'Starting R…';
+  if (button) button.disabled = true;
+
+  try {
+    const webR = await getUqWebR();
+    if (status) status.textContent = 'Running code…';
+    output.textContent = 'Running…';
+    const text = await evaluateRCodeToText(webR, code);
+
+    if (mode === 'plotly-box') {
+      await renderBoxplotRunOutput(output, text);
+    } else if (mode === 'pvalue-plot') {
+      await renderPValueRunOutput(output, text, webR);
+    } else {
+      output.textContent = text || 'Code ran successfully.';
+    }
+    if (status) status.textContent = 'Finished. Edit the code and run again anytime.';
+    if (id === 'eqvar') await sendEqVarContextToAgent();
+  } catch (error) {
+    console.error('R execution error:', error);
+    const message = error?.message ? error.message : String(error);
+    output.textContent = 'R error:\n' + message;
+    if (status) status.textContent = 'There was an R error. Edit the code and try again.';
+    if (id === 'eqvar') await sendEqVarContextToAgent();
+  } finally {
+    cell.classList.remove('r-running');
+    if (button) button.disabled = false;
+  }
+};
+
+/* ---------- Initial slide graphics ---------- */
 window.addEventListener('load', function(){
   drawStaticFPlot('theory-pvalue-plot', 3.0, 4, 20, 'right tail: P(F(4,20) ≥ 3.0)');
   drawStaticFPlot('brush-pvalue-plot', 29.8289, 2, 25, 'p-value = P(F(2,25) ≥ 29.829)');
-  drawEqVarBoxplot().catch((err)=>{ const div=document.getElementById('eqvar-plotly-boxplot'); if(div){ div.innerHTML='<div style="font-size:14px;color:#51247A;padding:16px;">Unable to load the boxplots.</div>'; } console.error(err); });
-  initEqVarChatKit();
+  drawBrushTurkeyBoxplot('eqvar-plotly-boxplot')
+    .then(() => sendEqVarContextToAgent())
+    .catch(err => {
+      const div = document.getElementById('eqvar-plotly-boxplot');
+      if(div) div.innerHTML = '<div class="plot-load-error">Unable to load the boxplots.</div>';
+      console.error(err);
+      sendEqVarContextToAgent();
+    });
+
+  const agentFrame = document.getElementById('anova-agent-frame');
+  if (agentFrame) {
+    agentFrame.addEventListener('load', () => {
+      setTimeout(sendEqVarContextToAgent, 150);
+    });
+  }
 });
+
+if (window.Reveal && typeof window.Reveal.on === 'function') {
+  window.Reveal.on('slidechanged', event => {
+    if (event.currentSlide?.classList.contains('eqvar-slide')) {
+      setTimeout(() => {
+        if (typeof Plotly !== 'undefined') {
+          const box = document.getElementById('eqvar-plotly-boxplot');
+          if (box) Plotly.Plots.resize(box);
+        }
+        sendEqVarContextToAgent();
+      }, 80);
+    }
+  });
+}
 </script>
 
-
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
-
-</div>
-<div class="spinner-grow spinner-grow-sm">
-
-</div>
-</div>
-<script type="vfs-file">
-W10=
-</script>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -1011,17 +1223,7 @@ W10=
         ]
       });
     </script>
-    <script type="ojs-module-contents">
-    eyJjb250ZW50cyI6W119
-    </script>
-    <script type="module">
-    if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-    window._ojs.paths.runtimeToDoc = "../../Chapter Slides";
-    window._ojs.paths.runtimeToRoot = "../..";
-    window._ojs.paths.docToRoot = "..";
-    window._ojs.selfContained = false;
-    window._ojs.runtime.interpretFromScriptTags();
-    </script>
+
     
     <script>
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
