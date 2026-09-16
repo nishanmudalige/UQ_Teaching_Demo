@@ -1,4 +1,0 @@
-openai-chatkit
-openai-agents
-fastapi
-uvicorn[standard]
