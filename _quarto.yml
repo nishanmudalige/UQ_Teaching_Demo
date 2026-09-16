@@ -8,6 +8,7 @@ project:
   resources:
     - data/
     - images/
+    - apps/
     - R/
     - .nojekyll
 
