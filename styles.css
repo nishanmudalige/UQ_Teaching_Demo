@@ -1255,3 +1255,104 @@ a { color: #00796B; }
     grid-row: auto;
   }
 }
+
+/* ── Readability fix: stop font-size compounding inside boxes ──────
+   Earlier rules shrink both the box (.card, .defbox, …) and every
+   p/li inside it, so box text ended up at ~12px. Text inside a box
+   now inherits the box size instead of shrinking a second time. */
+.reveal :is(.defbox, .examplebox, .thinkbox, .warnbox, .card, .taskbox,
+            .notebox, .mini-card, .stat-card, .callout) :is(p, li) {
+  font-size: 1em;
+}
+.reveal .model-defs li { font-size: 1em; }
+
+/* Box labels (defbox / thinkbox / warnbox) match the card labels. */
+.reveal :is(.defbox, .thinkbox, .warnbox) .label {
+  display: block;
+  color: var(--uq-purple-dark);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* Quarto callouts: match the size of other boxed text. */
+.reveal .slides div.callout.callout-style-simple {
+  font-size: 0.56em;
+}
+.reveal .slides div.callout.callout-style-simple div.callout-body {
+  font-weight: 400;
+}
+
+/* ANOVA table slide: equation and figure side by side so the
+   reference-distribution box fits above the footer. */
+.reveal .anova-table-test-slide .ref-dist-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+  align-items: center;
+}
+.reveal .anova-table-test-slide .anova-ref-figure {
+  margin-top: 0;
+}
+.reveal .anova-table-test-slide .anova-ref-figure img {
+  width: 100%;
+  max-height: 215px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.reveal .anova-table-test-slide .source-note {
+  font-size: 0.8em;
+  margin-top: 2px;
+}
+
+/* Overall-variation slide: labels and equations were too small to read. */
+.reveal .variation-cell .mini-title,
+.reveal .variation-total .mini-title {
+  font-size: 0.58em;
+}
+.reveal .overall-variation-slide .mini-note {
+  font-size: 0.4em !important;
+}
+.reveal .overall-variation-slide .mini-note p {
+  font-size: 1em;
+}
+.reveal .overall-variation-slide mjx-container[display="true"],
+.reveal .overall-variation-slide .variation-total mjx-container[display="true"] {
+  font-size: 76% !important;
+}
+
+
+/* ── Purple title card ─────────────────────────────────────────────
+   Rendered by the title-slide.html partial next to the .qmd, so it
+   survives every re-render of the slides. */
+.reveal #title-slide {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center !important;
+  height: 100%;
+}
+.reveal #title-slide .title-card {
+  background: linear-gradient(160deg, var(--uq-purple), #764aa0);
+  border-radius: 20px;
+  padding: 50px 65px;
+  width: 82%;
+  box-shadow: 0 6px 24px rgba(81, 36, 122, 0.25);
+}
+.reveal #title-slide .title-card h1,
+.reveal #title-slide .title-card p {
+  color: #ffffff !important;
+  border: 0 !important;
+}
+.reveal #title-slide .title-card h1.title {
+  font-size: 1.62em !important;
+  margin: 0 0 10px 0;
+}
+.reveal #title-slide .title-card .subtitle {
+  font-size: 0.78em;
+  margin: 0;
+}
+.reveal #title-slide .title-card .author {
+  font-size: 0.7em;
+  margin: 18px 0 0 0;
+  opacity: 0.92;
+}

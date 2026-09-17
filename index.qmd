@@ -1,12 +1,15 @@
 ---
-title: "UQ Brush-turkey ANOVA"
-subtitle: "GitHub Pages-ready Quarto site"
+title: "ANOVA"
+subtitle: "Teaching Demonstration"
 ---
 
 ::: {.single-landing}
-# UQ Brush-turkey ANOVA
+# ANOVA
 
-A one-way ANOVA teaching-demonstration site with reveal.js slides and interactive browser-run R cells.
+<!-- A one-way ANOVA teaching-demonstration site with reveal.js slides and interactive browser-run R cells. -->
+
+A teaching demonstration on one-way ANOVA made with Quarto. 
+Includes interactive R code blocks made with webR and an AI agent.
 
 <a class="home-button" href="Chapter%20Slides/uq-brushturkey-anova.html">Open the teaching demonstration slides</a>
 

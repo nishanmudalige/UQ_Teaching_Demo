@@ -1,7 +1,7 @@
 ---
-pagetitle: "One-way ANOVA with a UQ Brush-turkey Study"
-title: "One-way ANOVA with a UQ Brush-turkey Study"
-subtitle: "F distribution, one-way ANOVA theory, then a UQ biological example"
+pagetitle: "One-way ANOVA"
+title: "One-way ANOVA"
+subtitle: "<br> Teaching demonstration: F distribution, One-Way ANOVA"
 author: "Nishan Mudalige"
 format:
   revealjs:
@@ -14,6 +14,8 @@ format:
     footer: "Teaching demonstration | One-way ANOVA"
     pdf-separate-fragments: false
     html-math-method: mathjax
+    template-partials:
+      - title-slide.html
     code-copy: true
     code-fold: false
     incremental: false
@@ -24,8 +26,6 @@ format:
 execute:
   freeze: auto
 ---
-
-# One-way ANOVA with a UQ Brush-turkey Study {.title-slide}
 
 ## Teaching demonstration
 
@@ -52,7 +52,7 @@ Theory first, followed by an illustrative data analysis.
 
 The **F distribution** is a family of continuous probability distributions named after R. A. Fisher.
 
-::: {.three-col compact-cards}
+::: {.three-col .compact-cards}
 ::: {.card}
 <span class="label">Family notation</span>
 
@@ -90,7 +90,7 @@ Use the app below to calculate left-tail or right-tail probabilities from an $F(
 
 **Analysis of Variance (ANOVA)** is used to compare several population means at once.
 
-::: {.three-col compact-cards}
+::: {.three-col .compact-cards}
 ::: {.stat-card}
 <span class="label">Setting</span>
 
@@ -111,9 +111,9 @@ If the global test rejects, compare pairs carefully.
 :::
 
 ::: {.defbox}
-\[
+$$
 H_0:\mu_1=\mu_2=\cdots=\mu_d.
-\]
+$$
 :::
 
 ---
@@ -124,18 +124,18 @@ ANOVA (Analysis of Variance) compares several population means at once. Suppose 
 
 The one-factor ANOVA model is
 
-\[
+$$
 Y_{ik}=\mu+\tau_i+\epsilon_{ik}, \qquad \epsilon_{ik}\sim N(0,\sigma^2).
-\]
+$$
 
 Equivalently,
 
-\[
+$$
 Y_{ik}=\mu_i+\epsilon_{ik}, \qquad \epsilon_{ik}\sim N(0,\sigma^2),
 \qquad \mu_i=\mu+\tau_i.
-\]
+$$
 
-::: {.model-defs model-defs-wide}
+::: {.model-defs .model-defs-wide}
 - $Y_{ik}$: response for observation $k$ in group $i$
 - $\mu$: overall mean
 - $\tau_i$: effect for group $i$
@@ -154,7 +154,7 @@ The model assumes independent errors, approximate normality within groups, and a
 
 ::: {.overall-variation-layout}
 ::: {.overall-table-top}
-::: {.data-layout-table overall-data-table}
+::: {.data-layout-table .overall-data-table}
 |  | Group 1 | Group 2 | $\cdots$ | Group $d$ |
 |:---|:---:|:---:|:---:|:---:|
 | Observation 1 | $Y_{11}$ | $Y_{21}$ | $\cdots$ | $Y_{d1}$ |
@@ -166,7 +166,7 @@ The model assumes independent errors, approximate normality within groups, and a
 | Sample size | $n_1$ | $n_2$ | $\cdots$ | $n_d$ |
 :::
 
-::: {.mini-note center}
+::: {.mini-note .center}
 $\bar Y_i$, $S_i^2$, and $n_i$ are the sample mean, sample variance, and sample size for group $i$.
 :::
 :::
@@ -174,41 +174,41 @@ $\bar Y_i$, $S_i^2$, and $n_i$ are the sample mean, sample variance, and sample 
 ::: {.overall-mid-grid}
 ::: {.variation-cell}
 <span class="mini-title">Total sample size</span>
-\[
+$$
 n=n_1+n_2+\cdots+n_d
-\]
+$$
 :::
 
 ::: {.variation-cell}
 <span class="mini-title">Overall mean</span>
-\[
+$$
 \bar Y=\frac{1}{n}\sum_{i=1}^{d}\sum_{k=1}^{n_i}Y_{ik}
 =\frac{1}{n}\sum_{i=1}^{d}n_i\bar Y_i
-\]
+$$
 :::
 
 ::: {.variation-cell}
 <span class="mini-title">Within groups: error variation</span>
-\[
+$$
 SSE=\sum_{i=1}^{d}(n_i-1)S_i^2
-\]
+$$
 :::
 
 ::: {.variation-cell}
 <span class="mini-title">Between groups: factor variation</span>
-\[
+$$
 SSF=\sum_{i=1}^{d}n_i(\bar Y_i-\bar Y)^2
-\]
+$$
 :::
 :::
 
 ::: {.variation-total}
 <span class="mini-title">Total source of variation</span>
-\[
+$$
 SST=SSF+SSE,
 \qquad
 SST=\sum_{i=1}^{d}\sum_{k=1}^{n_i}(Y_{ik}-\bar Y)^2
-\]
+$$
 :::
 :::
 
@@ -227,28 +227,34 @@ SST=\sum_{i=1}^{d}\sum_{k=1}^{n_i}(Y_{ik}-\bar Y)^2
 ::: {.defbox .full-width-block}
 <span class="label">Hypotheses</span>
 
-\[
-H_0:\mu_1=\mu_2=\cdots=\mu_d
-\]
-
-\[
-H_a:\text{at least one mean is different.}
-\]
+$$
+\begin{aligned}
+H_0&:\mu_1=\mu_2=\cdots=\mu_d \\
+H_a&:\text{at least one mean is different.}
+\end{aligned}
+$$
 :::
 
 ::: {.thinkbox .full-width-block .reference-dist-block}
-<span class="label">Test statistic and Reference distribution</span>
+::: {.ref-dist-grid}
+::: {.ref-dist-text}
+<span class="label">Test statistic and reference distribution</span>
 
-\[
+$$
 F=\frac{MSF}{MSE}\sim F(d-1,n-d)\quad \text{under }H_0.
-\]
+$$
 
 The p-value is a **right-tail probability**.
+:::
 
-<div class="anova-ref-figure">
+::: {.anova-ref-figure}
 <img src="../images/f_pvalue_area.png" alt="F distribution curve with right-tail shaded to show the p-value">
-<div class="source-note center">Illustration of a right-tail p-value for an $F(4,20)$ curve.</div>
-</div>
+
+::: {.source-note .center}
+Illustration of a right-tail p-value for an $F(4,20)$ curve.
+:::
+:::
+:::
 :::
 
 ---
@@ -257,9 +263,9 @@ The p-value is a **right-tail probability**.
 
 For an observed ANOVA statistic $F^*$,
 
-\[
+$$
 p\text{-value}=P\{F(d-1,n-d)\ge F^*\}.
-\]
+$$
 
 <div id="theory-pvalue-plot" class="pvalue-plot"></div>
 
@@ -271,7 +277,7 @@ Large values of $F^*$ mean the between-level mean square is large relative to th
 
 ## Illustrative example: brush-turkeys at UQ {.compact-theory}
 
-::: {.two-col-wide example-photo-slide}
+::: {.two-col-wide .example-photo-slide}
 ::: {.col}
 - Study: Eiby and Booth (2009), *Journal of Comparative Physiology B*.
 - Researchers: Yvonne A. Eiby and David T. Booth, School of Biological Sciences, The University of Queensland.
@@ -326,7 +332,7 @@ The published F statistic is $F(2,25)$. Since $d=3$ levels, $n=25+3=28$ observat
 :::
 
 ::: {.source-note}
-Reference: Eiby, Y. A., & Booth, D. T. (2009). The effects of incubation temperature on the morphology and composition of Australian Brush-turkey (*Alectura lathami*) chicks. *Journal of Comparative Physiology B*, 179, 875--882. https://doi.org/10.1007/s00360-009-0370-4
+Reference: Eiby, Y. A., & Booth, D. T. (2009). The effects of incubation temperature on the morphology and composition of Australian Brush-turkey (*Alectura lathami*) chicks. *Journal of Comparative Physiology B*, 179, 875–882. <https://doi.org/10.1007/s00360-009-0370-4>
 :::
 
 ---
@@ -358,41 +364,41 @@ aggregate(incubation_days ~ temperature, data = brush_turkey, summary)</textarea
 | 34 °C | 10 | 46.700 | 1.567 | 0.396 |
 | 36 °C | 8 | 45.625 | 6.554 | 0.905 |
 
-\[
+$$
 \bar y=\frac{10(51.400)+10(46.700)+8(45.625)}{28}=48.071.
-\]
+$$
 :::
 
 ::: {.handcalc-work}
 <span class="label">Sums of squares</span>
 
-\[
+$$
 \begin{aligned}
 SSE&=\sum_{i=1}^{3}(n_i-1)s_i^2 \\
 &=9(1.600)+9(1.567)+7(6.554)=74.375,
 \end{aligned}
-\]
+$$
 
-\[
+$$
 \begin{aligned}
 SSF&=\sum_{i=1}^{3}n_i(\bar y_i-\bar y)^2 \\
 &=10(51.400-48.071)^2+10(46.700-48.071)^2 \\
 &\qquad +8(45.625-48.071)^2=177.482.
 \end{aligned}
-\]
+$$
 :::
 :::
 
 ::: {.anova-stat-row}
-\[
+$$
 MSF=\frac{SSF}{d-1}=\frac{177.482}{2}=88.741,
 \qquad
 MSE=\frac{SSE}{n-d}=\frac{74.375}{25}=2.975
-\]
+$$
 
-\[
+$$
 F^*=\frac{MSF}{MSE}=\frac{88.741}{2.975}=29.829.
-\]
+$$
 :::
 
 ::: {.thinkbox}
@@ -403,14 +409,14 @@ Since $d=3$ and $n=28$, the reference distribution is $F(2,25)$ under $H_0$.
 
 ## Hand calculation: p-value {.handcalc-slide}
 
-\[
+$$
 \begin{aligned}
 p\text{-value}
 &=P\{F(2,25)\ge 29.829\} \\
 &=1-P\{F(2,25)\le 29.829\} \\
 &\approx 0.000000239.
 \end{aligned}
-\]
+$$
 
 <div id="brush-pvalue-plot" class="pvalue-plot"></div>
 
@@ -453,7 +459,7 @@ c(F_star = F_star, df1 = df1, df2 = df2, p_value = p_value)</textarea><div class
 
 ---
 
-## Is Equal variance Assumption Satisfied {.eqvar-slide .code-slide}
+## Is the equal-variance assumption satisfied? {#is-equal-variance-assumption-satisfied .eqvar-slide .code-slide}
 
 ```{=html}
 <div class="eqvar-layout">
@@ -759,7 +765,7 @@ async function buildEqVarContext(){
       title: document.title,
       url: window.location.href,
       slide_id: 'is-equal-variance-assumption-satisfied',
-      slide_title: 'Is Equal variance Assumption Satisfied'
+      slide_title: 'Is the equal-variance assumption satisfied?'
     },
     visible_slide_text: getEqVarSlideText(),
     activity: {
