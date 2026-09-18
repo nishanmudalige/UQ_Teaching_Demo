@@ -1,5 +1,7 @@
-# UQ Brush-turkey ANOVA Quarto site
+# UQ Teaching Demonstration
 
-GitHub Pages-ready site. Serve from `docs/`.
+## One-Way ANOVA
 
-This version adds compact theory slides, a resized F-distribution probability app, boxplots before analysis, by-hand ANOVA calculations, p-value plots, and interactive browser-run R cells.
+- A teaching demonstration on one-way ANOVA made with Quarto. 
+- Includes interactive R code blocks made with webR and an AI agent.
+- Website available here: https://nishanmudalige.github.io/UQ_Teaching_Demo/ 
