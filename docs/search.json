@@ -158,7 +158,7 @@
     "href": "Chapter Slides/uq-brushturkey-anova.html#takeaway",
     "title": "One-way ANOVA",
     "section": "Takeaway",
-    "text": "Takeaway\n\nThe F distribution gives the reference curve for a mean-square ratio.\nOne-factor ANOVA compares several means with a single omnibus test.\nA good demonstration shows the hand calculation first, then verifies it in R.\nThe brush-turkey example connects the method to a local UQ biological study.\n\n\nBack to home"
+    "text": "Takeaway\n\nThe F distribution gives the reference curve for a mean-square ratio.\nOne-factor ANOVA compares several means with a single omnibus test.\nA good demonstration shows the hand calculation first, then verifies it in R.\nThe brush-turkey example connects the method to a local UQ biological study.\n\n\n\n  \n    AI assistant\n    Ask questions about the whole slide deck\n  \n  \n    \n    \n  \n\n\nBack to home"
   },
   {
     "objectID": "Chapter Slides/uq-brushturkey-anova.html#overall-mean-and-sources-of-variation",

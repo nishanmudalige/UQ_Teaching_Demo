@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Nishan Mudalige">
-  <title>UQ Brush-turkey ANOVA – One-way ANOVA</title>
+  <title>ANOVA – One-way ANOVA</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -676,7 +676,7 @@ kruskal.test(incubation_days ~ temperature, data = brush_turkey)</textarea><div 
 <p>The omnibus F-test answers whether there is evidence of any mean difference. Tukey comparisons help translate that into the scientific story: 32 °C differs from the warmer groups, while 34 °C and 36 °C are much closer.</p>
 </div>
 </section>
-<section id="takeaway" class="slide level2 compact-theory">
+<section id="takeaway" class="slide level2 compact-theory takeaway-slide">
 <h2>Takeaway</h2>
 <ol type="1">
 <li>The F distribution gives the reference curve for a mean-square ratio.</li>
@@ -684,6 +684,89 @@ kruskal.test(incubation_days ~ temperature, data = brush_turkey)</textarea><div 
 <li>A good demonstration shows the hand calculation first, then verifies it in R.</li>
 <li>The brush-turkey example connects the method to a local UQ biological study.</li>
 </ol>
+<style>
+.takeaway-slide ol {
+  font-size: 0.66em;
+  line-height: 1.24;
+  margin: 0.12rem 0 0.20rem;
+  padding-left: 1.35em;
+  list-style-position: outside;
+}
+.takeaway-slide ol li {
+  margin-bottom: 0.10rem;
+}
+.deck-agent-block {
+  width: 100%;
+  margin: 0.24rem auto 0;
+  padding: 6px 8px 8px;
+  border: 1px solid #d8c7ee;
+  border-radius: 16px;
+  background: #f7f2fb;
+  box-sizing: border-box;
+}
+.deck-agent-text {
+  display: flex;
+  align-items: baseline;
+  gap: 0.40rem;
+  margin: 0 0 5px;
+  padding-left: 2px;
+}
+.deck-agent-text .label {
+  font-size: 0.35em;
+  margin: 0;
+  white-space: nowrap;
+}
+.deck-agent-title {
+  color: #2F3437;
+  font-weight: 800;
+  font-size: 0.42em;
+  line-height: 1.00;
+  margin: 0;
+}
+/* The white panel fills the purple block, and the agent fills the panel.
+   Reveal.js caps every iframe at max-width/max-height 95%, which is what
+   left the agent floating short of the panel's right and bottom edges. */
+.deck-agent-frame-wrap {
+  width: 100%;
+  height: 384px;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: white;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 1px rgba(81,36,122,0.18);
+}
+/* scrolling="no" on the frame locks the agent page itself, so it cannot be
+   panned up and down past its own layout. The agent's inner conversation
+   scrollbar is an element scrollbar and is unaffected. */
+#deck-agent-frame {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border: 0;
+  display: block;
+  background: white;
+}
+/* Keep the Back to home button on screen below the taller agent panel. */
+.takeaway-slide .home-button-row {
+  margin-top: 10px;
+}
+.reveal .takeaway-slide a.home-button {
+  margin-top: 0 !important;
+}
+</style>
+<div class="deck-agent-block">
+  <div class="deck-agent-text">
+    <span class="label">AI assistant</span>
+    <div class="deck-agent-title">Ask questions about the whole slide deck</div>
+  </div>
+  <div class="deck-agent-frame-wrap">
+    <iframe id="deck-agent-frame" src="https://anova-agent.onrender.com/" title="ANOVA Assistant for the full slide deck" scrolling="no" loading="lazy" allow="clipboard-write">
+    </iframe>
+  </div>
+</div>
 <div class="home-button-row">
 <p><a href="../index.html" class="home-button">Back to home</a></p>
 </div>
@@ -919,6 +1002,107 @@ async function buildEqVarContext(){
   };
 }
 
+
+function getDeckSlideText(section){
+  if (!section) return '';
+  const clone = section.cloneNode(true);
+  clone.querySelectorAll('iframe, script, style, textarea, button').forEach(el => el.remove());
+  return (clone.innerText || clone.textContent || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getDeckSections(){
+  return Array.from(document.querySelectorAll('.reveal .slides section.slide.level2, section.slide.level2'))
+    .map((section, index) => {
+      const heading = section.querySelector('h2');
+      return {
+        slide_number: index + 1,
+        slide_id: section.id || null,
+        slide_title: heading ? heading.textContent.trim() : null,
+        visible_slide_text: getDeckSlideText(section)
+      };
+    })
+    .filter(slide => slide.visible_slide_text);
+}
+
+async function buildDeckContext(){
+  let rows = [];
+  try {
+    rows = await getCsvRows();
+  } catch (error) {
+    console.warn('Unable to add dataset to deck context:', error);
+  }
+
+  const temperatures = [32, 34, 36];
+  const groups = temperatures.map(temp => {
+    const values = rows
+      .filter(d => d.temperature === temp)
+      .map(d => d.incubation_period);
+
+    return {
+      temperature_c: temp,
+      n: values.length,
+      mean_days: meanValue(values),
+      sample_sd_days: sampleSD(values),
+      observations_days: values,
+      boxplot: boxplotSummary(values)
+    };
+  });
+
+  return {
+    schema_version: 1,
+    source: 'UQ Brush-turkey ANOVA Quarto/RevealJS full slide deck',
+    page: {
+      title: document.title,
+      url: window.location.href,
+      slide_id: 'takeaway',
+      slide_title: 'Takeaway'
+    },
+    activity: {
+      statistical_method: 'one-way ANOVA',
+      scope: 'entire slide deck',
+      response_variable: 'incubation period (days)',
+      group_variable: 'incubation temperature (degrees Celsius)',
+      instruction: 'Answer questions using the slide deck context below. The student may ask about any slide in the deck.'
+    },
+    slide_deck: {
+      deck_title: 'One-way ANOVA',
+      sections: getDeckSections()
+    },
+    dataset: {
+      name: 'brushturkey_incubation.csv',
+      row_count: rows.length,
+      rows: rows
+    },
+    group_summaries: groups.map(g => ({
+      temperature_c: g.temperature_c,
+      n: g.n,
+      mean_days: g.mean_days,
+      sample_sd_days: g.sample_sd_days
+    }))
+  };
+}
+
+async function sendDeckContextToAgent(){
+  const iframe = document.getElementById('deck-agent-frame');
+  if (!iframe || !iframe.contentWindow) return;
+
+  try {
+    const context = await buildDeckContext();
+    iframe.contentWindow.postMessage(
+      {
+        type: 'ANOVA_PAGE_CONTEXT',
+        context
+      },
+      ANOVA_AGENT_ORIGIN
+    );
+    iframe.dataset.contextSent = 'true';
+  } catch (error) {
+    console.error('Unable to send full deck context to agent:', error);
+  }
+}
+
 async function sendEqVarContextToAgent(){
   const iframe = document.getElementById('anova-agent-frame');
   if (!iframe || !iframe.contentWindow) return;
@@ -943,8 +1127,17 @@ async function sendEqVarContextToAgent(){
    iframe JavaScript is ready. */
 window.addEventListener('message', event => {
   if (event.origin !== ANOVA_AGENT_ORIGIN) return;
-  if (event.data?.type === 'ANOVA_AGENT_READY') {
+  if (event.data?.type !== 'ANOVA_AGENT_READY') return;
+
+  const eqvarFrame = document.getElementById('anova-agent-frame');
+  const deckFrame = document.getElementById('deck-agent-frame');
+
+  if (eqvarFrame?.contentWindow && event.source === eqvarFrame.contentWindow) {
     sendEqVarContextToAgent();
+  }
+
+  if (deckFrame?.contentWindow && event.source === deckFrame.contentWindow) {
+    sendDeckContextToAgent();
   }
 });
 
@@ -1105,6 +1298,13 @@ window.addEventListener('load', function(){
       setTimeout(sendEqVarContextToAgent, 150);
     });
   }
+
+  const deckAgentFrame = document.getElementById('deck-agent-frame');
+  if (deckAgentFrame) {
+    deckAgentFrame.addEventListener('load', () => {
+      setTimeout(sendDeckContextToAgent, 150);
+    });
+  }
 });
 
 if (window.Reveal && typeof window.Reveal.on === 'function') {
@@ -1117,6 +1317,9 @@ if (window.Reveal && typeof window.Reveal.on === 'function') {
         }
         sendEqVarContextToAgent();
       }, 80);
+    }
+    if (event.currentSlide?.id === 'takeaway') {
+      setTimeout(sendDeckContextToAgent, 80);
     }
   });
 }
