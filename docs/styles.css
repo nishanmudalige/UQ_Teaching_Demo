@@ -264,6 +264,8 @@ a { color: #00796B; }
 .two-col,
 .two-col-wide,
 .three-col,
+.four-col,
+.five-col,
 .four-grid {
   display: grid;
   gap: 28px;
@@ -273,6 +275,8 @@ a { color: #00796B; }
 .two-col { grid-template-columns: 1fr 1fr; }
 .two-col-wide { grid-template-columns: 1.08fr 0.92fr; }
 .three-col { grid-template-columns: repeat(3, 1fr); }
+.four-col { grid-template-columns: repeat(4, 1fr); }
+.five-col { grid-template-columns: repeat(5, 1fr); }
 .four-grid { grid-template-columns: repeat(2, 1fr); }
 .col { min-width: 0; }
 

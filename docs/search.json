@@ -11,7 +11,7 @@
     "href": "Chapter Slides/anova-chapter.html#teaching-demonstration",
     "title": "One-way ANOVA",
     "section": "Teaching demonstration",
-    "text": "Teaching demonstration\nFirst the F distribution. Then one-way ANOVA. Then a local UQ brush-turkey example.\n\n\n\nTheory first, followed by an illustrative data analysis."
+    "text": "Teaching demonstration\n\nThe F distribution\nOne-way ANOVA\nExample (On some local UQ residents)\n\n\n\n\nTheory first, followed by an illustrative data analysis.\n\n\n\n\nRoadmap\n\n\n\nReview\nReview of inference and 2 sample  \\(t-\\)tests.\n\n\nF distribution\nThe theory and notation of the  \\(F-\\)distribution.\n\n\nANOVA One-factor model, decomposition of variation.\n\n\n\nExample An example on some (famous) local UQ residents\n\n\nWrapup Wrap and review, things to think about."
   },
   {
     "objectID": "Chapter Slides/anova-chapter.html#lecture-road-map",
@@ -25,21 +25,21 @@
     "href": "Chapter Slides/anova-chapter.html#the-f-distribution",
     "title": "One-way ANOVA",
     "section": "The F distribution",
-    "text": "The F distribution\nThe F distribution is a family of continuous probability distributions named after R. A. Fisher.\n\n\nFamily notation\nWe write \\(F(df_1,df_2)\\).\n\n\nTwo degrees of freedom\n\\(df_1\\) is the numerator df and \\(df_2\\) is the denominator df.\n\n\nR functions\nUse df(), pf(), qf(), and rf().\n\n\n\nIn ANOVA, the F distribution is the reference distribution for the ratio \\(MSF/MSE\\)."
+    "text": "The F distribution\nThe F distribution is a family of continuous probability distributions named after R. A. Fisher.\n\n\nFamily notation\nWe write \\(F(df_1,df_2)\\).\n\n\nTwo degrees of freedom\n\n\\(df_1\\): numerator df; \\(df_2\\) denominator df.\n\n\nR functions\nUse df(), pf(), qf(), and rf().\n\n\n\n\nIn ANOVA, the F distribution is the reference distribution for the ratio of the variation explained by the factor to the unexplained variation (MSF/MSE).\n\n\n\n\nF-distribution probability calculator"
   },
   {
     "objectID": "Chapter Slides/anova-chapter.html#f-distribution-probability-calculator",
     "href": "Chapter Slides/anova-chapter.html#f-distribution-probability-calculator",
     "title": "One-way ANOVA",
     "section": "F-distribution probability calculator",
-    "text": "F-distribution probability calculator\nUse the app below to calculate left-tail or right-tail probabilities from an \\(F(df_1,df_2)\\) distribution."
+    "text": "F-distribution probability calculator\n–&gt;\n\nF-distribution probability calculator"
   },
   {
     "objectID": "Chapter Slides/anova-chapter.html#why-anova",
     "href": "Chapter Slides/anova-chapter.html#why-anova",
     "title": "One-way ANOVA",
     "section": "Why ANOVA?",
-    "text": "Why ANOVA?\nAnalysis of Variance (ANOVA) is used to compare several population means at once.\n\n\nSetting\nThere are \\(d\\ge 3\\) groups or factor levels.\n\n\nGlobal question\nDo all groups have the same population mean?\n\n\nNext step\nIf the global test rejects, compare pairs carefully.\n\n\n\n\\[\nH_0:\\mu_1=\\mu_2=\\cdots=\\mu_d.\n\\]"
+    "text": "Why ANOVA?\nAnalysis of Variance (ANOVA) is used to compare several population means at once.\n\n\nSetting\nThere are \\(d\\ge 3\\) groups or factor levels.\n\n\nGlobal question\nDo all groups have the same population mean?\n\n\n\n\n\n\n\\[\nH_0:\\mu_1=\\mu_2=\\cdots=\\mu_d.\n\\]\n\n\n\n\n\n\nWhy does the procedure change so much? Why not compare all pairs?\n\\[\n\\begin{array}{rcl}\n\\mu_1 & = & \\mu_2 \\\\\n\\mu_1 & = & \\mu_3 \\\\\n\\mu_1 & = & \\mu_4 \\\\\n      & \\vdots & \\\\\n\\mu_1 & = & \\mu_d\n\\end{array}\n\\qquad\n\\begin{array}{rcl}\n\\mu_2 & = & \\mu_3 \\\\\n\\mu_2 & = & \\mu_4 \\\\\n      & \\vdots & \\\\\n\\mu_2 & = & \\mu_d \\\\\n\\hfill\\\\\n\\end{array}\n\\qquad\n\\cdots\n\\qquad\n\\begin{array}{rcl}\n\\mu_{d-1} & = & \\mu_d\\\\\n\\hfill\\\\\n\\hfill\\\\\n\\hfill\\\\\n\\hfill\\\\\n\\end{array}\n\\]\n\n\n\n\n\nWith 2 groups, there is only one difference between means to test.\nWith 3 or more groups, there are multiple possible differences. Repeated \\(t\\)-tests increase the chance of false positives.\nANOVA solves this by testing all group means together using between-group vs. within-group variation."
   },
   {
     "objectID": "Chapter Slides/anova-chapter.html#one-factor-anova-model-and-notation",
@@ -173,5 +173,47 @@
     "title": "One-way ANOVA",
     "section": "",
     "text": "One-way ANOVA\nThis chapter introduces the F distribution and one-way ANOVA, including an illustrative example using data related to some famous UQ residents.\nOpen the interactive slides\nDownload the CSV dataset\nLearning goals:\n\nIdentify the response and factor\nInterpret an ANOVA table \nCheck assumptions using reproducible R code.\n\nBack to home"
+  },
+  {
+    "objectID": "Chapter Slides/anova-chapter.html#roadmap",
+    "href": "Chapter Slides/anova-chapter.html#roadmap",
+    "title": "One-way ANOVA",
+    "section": "Roadmap",
+    "text": "Roadmap\n\n\nReview\nReview of inference and 2 sample \\(t-\\)tests.\n\n\nF distribution\nThe theory and notation of the  \\(F-\\)distribution.\n\n\nANOVA One-factor ANOVA notation and model.\n\n\nSources of Variation How ANOVA decomposes variation.\n\n\nExample An example on some local UQ residents"
+  },
+  {
+    "objectID": "Chapter Slides/anova-chapter.html#anova",
+    "href": "Chapter Slides/anova-chapter.html#anova",
+    "title": "One-way ANOVA",
+    "section": "ANOVA",
+    "text": "ANOVA\n\nThe F distribution\nOne-way ANOVA\nExample (On some local UQ residents)\n\n\n\n\nTheory first, followed by an illustrative data analysis.\n\n\n\n\nRoadmap\n\n\n\nReview\nReview of inference and 2 sample  \\(t-\\)tests.\n\n\nF distribution\nThe theory and notation of the  \\(F-\\)distribution.\n\n\nANOVA One-factor model, decomposition of variation.\n\n\n\nExample An example on some (famous) local UQ residents\n\n\nWrapup Wrap and review, things to think about."
+  },
+  {
+    "objectID": "Chapter Slides/anova-chapter.html#review-populations-parameters-and-samples",
+    "href": "Chapter Slides/anova-chapter.html#review-populations-parameters-and-samples",
+    "title": "One-way ANOVA",
+    "section": "Review: populations, parameters and samples",
+    "text": "Review: populations, parameters and samples\n\n\nPopulation and parameter\nThe population is every unit we want a conclusion about. A parameter is a fixed but unknown number describing it, such as \\(\\mu\\) or \\(\\sigma\\).\n\n\nSample and statistic\nThe sample is the part of the population we actually measure. A statistic is computed from it, such as \\(\\bar x\\) or \\(s\\).\n\n\n\n\n\n\n\nPopulation\n\\(\\mu,\\ \\sigma\\)\n\n\n\n\n\n\n\nSample\n\\(\\bar x,\\ s,\\ n\\)\n\n\n\n\nWe sample from the population, then use the statistics to say something about the parameters.\n\n\n\n\n\nA parameter is fixed but unknown; a statistic is known but random. The estimator \\(\\bar X\\) is a random variable, while the estimate \\(\\bar x\\) is the single number it takes for our data."
+  },
+  {
+    "objectID": "Chapter Slides/anova-chapter.html#two-populations-the-difference-of-two-means",
+    "href": "Chapter Slides/anova-chapter.html#two-populations-the-difference-of-two-means",
+    "title": "One-way ANOVA",
+    "section": "Two populations: the difference of two means",
+    "text": "Two populations: the difference of two means\n\n\n\nPopulation 1\n\\(\\mu_1,\\ \\sigma_1\\)\n\n\n\n\n\n\n\nSample 1\n\\(\\bar x_1,\\ s_1,\\ n_1\\)\n\n\n\n\nPopulation 2\n\\(\\mu_2,\\ \\sigma_2\\)\n\n\n\n\n\n\n\nSample 2\n\\(\\bar x_2,\\ s_2,\\ n_2\\)\n\n\n\n\n\n\n\nModel\n\\(X_1,\\dots,X_{n_1}\\stackrel{\\text{iid}}{\\sim} N(\\mu_1,\\sigma_1^2)\\) and \\(Y_1,\\dots,Y_{n_2}\\stackrel{\\text{iid}}{\\sim} N(\\mu_2,\\sigma_2^2)\\), all independent.\n\n\nParameter of interest\n\\(\\mu_1-\\mu_2\\), estimated by \\(\\bar x_1-\\bar x_2\\).\n\\(H_0:\\mu_1-\\mu_2=0\\) versus \\(H_a:\\mu_1-\\mu_2\\neq 0\\)."
+  },
+  {
+    "objectID": "Chapter Slides/anova-chapter.html#the-two-sample-t-test",
+    "href": "Chapter Slides/anova-chapter.html#the-two-sample-t-test",
+    "title": "One-way ANOVA",
+    "section": "The two-sample \\(t\\)-test",
+    "text": "The two-sample \\(t\\)-test\n\n\nUnequal variances (Welch)\n\\[\nT=\\frac{\\bar X-\\bar Y}{\\sqrt{\\frac{S_1^2}{n_1}+\\frac{S_2^2}{n_2}}}\n\\ \\stackrel{\\text{approx}}{\\sim}\\ t_{\\nu}\n\\]\n\\[\n\\nu=\\frac{\\left(\\frac{S_1^2}{n_1}+\\frac{S_2^2}{n_2}\\right)^2}\n{\\frac{1}{n_1-1}\\left(\\frac{S_1^2}{n_1}\\right)^2+\\frac{1}{n_2-1}\\left(\\frac{S_2^2}{n_2}\\right)^2}\n\\]\n\n\nEqual variances (pooled)\n\\[\nT=\\frac{\\bar X-\\bar Y}{S_p\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\\ \\sim\\ t_{n_1+n_2-2}\n\\]\n\\[\nS_p^2=\\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}\n\\]\n\n\n\n\n\n\\(S_p^2\\) pools the within-group variation into one estimate of a common \\(\\sigma^2\\). Keep an eye on it: in ANOVA the same quantity reappears as \\(MSE\\)."
+  },
+  {
+    "objectID": "Chapter Slides/anova-chapter.html#example-does-caffeine-raise-pulse-rate",
+    "href": "Chapter Slides/anova-chapter.html#example-does-caffeine-raise-pulse-rate",
+    "title": "One-way ANOVA",
+    "section": "Example: does caffeine raise pulse rate?",
+    "text": "Example: does caffeine raise pulse rate?\nChange in pulse rate (bpm) for two independent groups.\n\n\n\n\n\nGroup\n\\(n_i\\)\n\\(\\bar x_i\\)\n\\(s_i^2\\)\n\n\n\n\nCaffeinated\n10\n15.800\n69.289\n\n\nDecaf\n10\n5.100\n31.211\n\n\n\nObserved difference: \\(\\bar x_1-\\bar x_2=10.7\\) bpm.\n\n\n\nResults\nWelch: \\(t=3.375\\), \\(\\nu=15.74\\), \\(p=0.0020\\).\nPooled: \\(t=3.375\\), \\(\\mathrm{df}=18\\), \\(p=0.0017\\).\nStrong evidence that \\(\\mu_1-\\mu_2&gt;0\\).\n\n\n\nRun codeR runs in the browser. First run may take a moment.x &lt;- c(17, 22, 21, 16, 6, -2, 27, 15, 16, 20)   # caffeinated\ny &lt;- c(4, 10, 7, -9, 5, 4, 5, 7, 6, 12)         # decaf\n\nt.test(x, y, alternative = \"greater\")Click Run code.\n\nTwo populations need one test. With \\(d\\ge 3\\) populations there are \\(d(d-1)/2\\) pairwise differences: the gap ANOVA fills."
   }
 ]
