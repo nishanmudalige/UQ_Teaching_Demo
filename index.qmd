@@ -11,9 +11,9 @@ subtitle: "Teaching Demonstration on One Way ANOVA"
 A teaching demonstration on one-way ANOVA made with Quarto. 
 Includes interactive R code blocks made with webR and an AI agent.
 
-<a class="home-button" href="Chapter%20Slides/uq-brushturkey-anova.html">Open the teaching demonstration slides</a>
+<a class="home-button" href="Chapter%20Slides/anova-chapter.html">Open the teaching demonstration slides</a>
 
-<a class="home-button secondary" href="Chapter%20Landing%20Pages/brush-turkey-anova.html">Open the chapter landing page</a>
+<a class="home-button secondary" href="Chapter%20Landing%20Pages/anova-landing.html">Open the chapter landing page</a>
 
-Source files: [CSV dataset](data/brushturkey_incubation.csv), [R analysis script](R/brushturkey_anova.R), [reconstruction notes](data/RECONSTRUCTION_NOTES.md).
+Source files: [CSV dataset](data/incubation_data.csv), [R analysis script](R/anova_analysis.R), [reconstruction notes](data/RECONSTRUCTION_NOTES.md).
 :::

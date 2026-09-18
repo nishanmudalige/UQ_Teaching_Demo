@@ -14,17 +14,17 @@ project:
 
 website:
   title: "ANOVA"
-  site-url: "https://nishanmudalige.github.io/UQ_BrushTurkey_ANOVA"
+  site-url: "https://nishanmudalige.github.io/UQ_Teaching_Demo"
   search: false
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: Chapter Landing Pages/brush-turkey-anova.qmd
+      - href: Chapter Landing Pages/anova-landing.qmd
         text: Chapter page
-      - href: Chapter Slides/uq-brushturkey-anova.qmd
+      - href: Chapter Slides/anova-chapter.qmd
         text: Slides
-      - href: data/brushturkey_incubation.csv
+      - href: data/incubation_data.csv
         text: Data
 
 format:

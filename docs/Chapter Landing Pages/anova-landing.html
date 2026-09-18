@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ANOVA</title>
+<title>One-way ANOVA – ANOVA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,19 +23,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -64,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">ANOVA</span>
     </a>
   </div>
@@ -74,19 +74,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Chapter Landing Pages/anova-landing.html"> 
+    <a class="nav-link active" href="../Chapter Landing Pages/anova-landing.html" aria-current="page"> 
 <span class="menu-text">Chapter page</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Chapter Slides/anova-chapter.html"> 
+    <a class="nav-link" href="../Chapter Slides/anova-chapter.html"> 
 <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data/incubation_data.csv"> 
+    <a class="nav-link" href="../data/incubation_data.csv"> 
 <span class="menu-text">Data</span></a>
   </li>  
 </ul>
@@ -106,8 +106,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ANOVA</h1>
-<p class="subtitle lead">Teaching Demonstration on One Way ANOVA</p>
+<h1 class="title">One-way ANOVA</h1>
 </div>
 
 
@@ -124,13 +123,18 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="anova" class="level1 single-landing">
-<h1>ANOVA</h1>
-<!-- A one-way ANOVA teaching-demonstration site with reveal.js slides and interactive browser-run R cells. -->
-<p>A teaching demonstration on one-way ANOVA made with Quarto. Includes interactive R code blocks made with webR and an AI agent.</p>
-<p><a class="home-button" href="Chapter Slides/anova-chapter.html">Open the teaching demonstration slides</a></p>
-<p><a class="home-button secondary" href="Chapter Landing Pages/anova-landing.html">Open the chapter landing page</a></p>
-<p>Source files: <a href="data/incubation_data.csv">CSV dataset</a>, <a href="R/anova_analysis.R">R analysis script</a>, <a href="data/RECONSTRUCTION_NOTES.md">reconstruction notes</a>.</p>
+<section id="one-way-anova" class="level1 single-landing">
+<h1>One-way ANOVA</h1>
+<p>This chapter introduces the F distribution and one-way ANOVA, including an illustrative example using data related to some famous UQ residents.</p>
+<p><a class="home-button" href="../Chapter Slides/anova-chapter.html">Open the interactive slides</a></p>
+<p><a class="home-button secondary" href="../data/incubation_data.csv">Download the CSV dataset</a></p>
+<p>Learning goals:</p>
+<ul>
+<li>Identify the response and factor</li>
+<li>Interpret an ANOVA table <!-- - use post hoc comparisons --></li>
+<li>Check assumptions using reproducible R code.</li>
+</ul>
+<p><a class="home-button small-button" href="../index.html">Back to home</a></p>
 </section>
 
 
