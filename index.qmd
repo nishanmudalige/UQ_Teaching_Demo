@@ -1,6 +1,6 @@
 ---
 title: "ANOVA"
-subtitle: "Teaching Demonstration"
+subtitle: "Teaching Demonstration on One Way ANOVA"
 ---
 
 ::: {.single-landing}

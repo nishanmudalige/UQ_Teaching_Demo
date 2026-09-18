@@ -13,7 +13,7 @@ project:
     - .nojekyll
 
 website:
-  title: "UQ Brush-turkey ANOVA"
+  title: "ANOVA"
   site-url: "https://nishanmudalige.github.io/UQ_BrushTurkey_ANOVA"
   search: false
   navbar:
