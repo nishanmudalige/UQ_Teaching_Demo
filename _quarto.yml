@@ -3,8 +3,8 @@ project:
   output-dir: docs
   render:
     - index.qmd
-    - "Chapter Landing Pages/*.qmd"
-    - "Chapter Slides/*.qmd"
+    - "pages/*.qmd"
+    - "slides/*.qmd"
   resources:
     - data/
     - images/
@@ -20,16 +20,17 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: Chapter Landing Pages/anova-landing.qmd
+      - href: pages/anova-landing.qmd
         text: Chapter page
-      - href: Chapter Slides/anova-chapter.qmd
+      - href: slides/anova-chapter.qmd
         text: Slides
       - href: data/incubation_data.csv
         text: Data
 
+# The slide deck sets its own revealjs format in slides/anova-chapter.qmd.
+# Declaring both formats here made every page render twice into the same
+# file name, which failed the project render.
 format:
-  revealjs:
-    auto-stretch: false
   html:
     theme: flatly
     css: styles.css

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://nishanmudalige.github.io/UQ_Teaching_Demo/slides/anova-chapter.html</loc>
+    <lastmod>2026-09-20T16:47:18.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://nishanmudalige.github.io/UQ_Teaching_Demo/index.html</loc>
-    <lastmod>2026-09-18T16:00:41.000Z</lastmod>
+    <lastmod>2026-09-20T16:46:01.000Z</lastmod>
   </url>
   <url>
-    <loc>https://nishanmudalige.github.io/UQ_Teaching_Demo/Chapter Slides/anova-chapter.html</loc>
-    <lastmod>2026-09-20T06:00:02.088Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nishanmudalige.github.io/UQ_Teaching_Demo/Chapter Landing Pages/anova-landing.html</loc>
-    <lastmod>2026-09-17T23:59:12.778Z</lastmod>
+    <loc>https://nishanmudalige.github.io/UQ_Teaching_Demo/pages/anova-landing.html</loc>
+    <lastmod>2026-09-20T16:46:01.131Z</lastmod>
   </url>
 </urlset>
