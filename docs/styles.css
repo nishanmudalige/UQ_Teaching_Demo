@@ -183,6 +183,7 @@ a { color: #00796B; }
 .warnbox {
   background: #fff3e0;
   border-left: 7px solid #ef6c00;
+  margin-top: 20px;
 }
 
 .stat-card {
@@ -800,10 +801,10 @@ a { color: #00796B; }
   padding: 4px 6px !important;
 }
 .reveal .mini-note {
-  font-size: 0.47em;
+  font-size: 0.44em;
   color: var(--uq-muted);
-  line-height: 1.18;
-  margin-top: 6px;
+  line-height: 0.18;
+  margin-top: 2px;
 }
 .reveal .overall-right mjx-container[display="true"] {
   margin: 0.30em 0 !important;
@@ -893,7 +894,7 @@ a { color: #00796B; }
   width: 23%;
 }
 .reveal .mini-note {
-  font-size: 0.39em !important;
+  font-size: 0.55em !important;
   color: var(--uq-muted);
   line-height: 1.10;
   margin: 2px auto 0 auto;
@@ -1359,4 +1360,44 @@ a { color: #00796B; }
   font-size: 0.7em;
   margin: 18px 0 0 0;
   opacity: 0.92;
+}
+
+.reveal .quarto-figure { margin-bottom: 0.5em; }
+
+/* MathJax (Quarto's default) */
+.reveal mjx-container[display="true"] {
+  margin-top: 0.2em !important;
+  margin-bottom: 0.2em !important;
+}
+
+
+/* Using KaTeX */
+.reveal .katex-display {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+
+.purple-link {
+  color: purple !important;
+  text-decoration: underline !important;
+}
+/* Brush turkey slide: tighten gap between image and caption (.mini-note) */
+#illustrative-example-some-famous-residents-at-uq .quarto-figure,
+#illustrative-example-some-famous-residents-at-uq figure {
+  margin-bottom: 0 !important;
+}
+#illustrative-example-some-famous-residents-at-uq figure p {
+  margin-bottom: 0 !important;
+  line-height: 0 !important;
+}
+#illustrative-example-some-famous-residents-at-uq img.example-photo {
+  margin-bottom: 0 !important;
+  vertical-align: bottom;
+}
+#illustrative-example-some-famous-residents-at-uq .mini-note {
+  margin-top: 6px !important;
+}
+#illustrative-example-some-famous-residents-at-uq .mini-note p {
+  margin-top: 0 !important;
 }

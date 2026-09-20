@@ -28,6 +28,8 @@ website:
         text: Data
 
 format:
+  revealjs:
+    auto-stretch: false
   html:
     theme: flatly
     css: styles.css

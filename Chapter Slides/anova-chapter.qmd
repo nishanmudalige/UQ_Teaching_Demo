@@ -40,24 +40,24 @@ Theory first, followed by an illustrative data analysis.
 
 <h5>Roadmap</h5>
 
-::: {.five-col .compact-cards}
+::: {.four-col .compact-cards}
 
 ::: {.card}
 <span class="label">Review</span>
 
-Review of inference and 2 sample <br> $t-$tests.
+Review of inference and 2 sample $t-$tests.
 :::
 
 ::: {.card}
 <span class="label">F distribution</span>
 
-The theory and notation of the <br> $F-$distribution.
+The theory and notation of the $F$ distribution.
 :::
 
 ::: {.card}
 <span class="label">ANOVA</span>
-One-factor model,
-decomposition of variation.
+One-factor model; decomposition of variation; 
+an illustrative example.
 :::
 
 <!--
@@ -67,16 +67,21 @@ How ANOVA decomposes variation.
 :::
 -->
 
+
+<!--
 ::: {.card}
 <span class="label">Example</span>
 An example on some (famous) local UQ residents
 :::
+-->
+
 
 ::: {.card}
-<span class="label">Wrapup</span>
-Wrap and review, 
+<span class="label">Wrap up</span>
+Wrap up and review, 
 things to think about.
 :::
+
 
 :::
 
@@ -149,13 +154,21 @@ things to think about.
 ::: {.card}
 <span class="label">Population and parameter</span>
 
-The **population** is every unit we want a conclusion about. A **parameter** is a fixed but unknown number describing it, such as $\mu$ or $\sigma$.
+A **population** is every unit we want a conclusion about. 
+
+A **parameter** is a numerical characteristic describing the population, such as $\mu$ or $\sigma$.
+
+Parameters are often unknown.
 :::
 
 ::: {.stat-card}
 <span class="label">Sample and statistic</span>
 
-The **sample** is the part of the population we actually measure. A **statistic** is computed from it, such as $\bar x$ or $s$.
+The **sample** is a subset of a population we actually measure. 
+
+A **statistic** is a numerical characteristic describing the sample, such as as $\bar x$ or $s$.
+
+Statistics are measured and known.
 :::
 :::
 
@@ -191,7 +204,9 @@ We sample from the population, then use the statistics to say something about th
 A parameter is fixed but unknown; a statistic is known but random. The **estimator** $\bar X$ is a random variable, while the **estimate** $\bar x$ is the single number it takes for our data.
 :::
 
-## Two populations: the difference of two means {.compact-theory}
+## Two populations: Tests on a difference of two means {.compact-theory}
+
+<br>
 
 ::: {.samp-diagram .two-pop}
 ::: {.samp-col}
@@ -230,20 +245,40 @@ $\bar x_2,\ s_2,\ n_2$
 <!-- pause -->
 . . .
 
+<br>
+
 ::: {.two-col .compact-cards}
 ::: {.card}
 <span class="label">Model</span>
+$X_1,\dots,X_{n_1}\stackrel{\text{iid}}{\sim} N(\mu_1,\sigma_1^2)$;
 
-$X_1,\dots,X_{n_1}\stackrel{\text{iid}}{\sim} N(\mu_1,\sigma_1^2)$ and $Y_1,\dots,Y_{n_2}\stackrel{\text{iid}}{\sim} N(\mu_2,\sigma_2^2)$, all independent.
+$Y_1,\dots,Y_{n_2}\stackrel{\text{iid}}{\sim} N(\mu_2,\sigma_2^2)$;
+
+All independent.
 :::
+
 
 ::: {.stat-card}
-<span class="label">Parameter of interest</span>
+<span class="label">Parameter of interest and statistical test</span>
+$H_0:\mu_1-\mu_2=0$  
+
+$H_a:\mu_1-\mu_2\neq 0$.
 
 $\mu_1-\mu_2$, estimated by $\bar x_1-\bar x_2$.
-
-$H_0:\mu_1-\mu_2=0$ versus $H_a:\mu_1-\mu_2\neq 0$.
 :::
+
+
+<!--
+::: {.card}
+<span class="label">Parameter of interest and statistical test</span>
+$H_0:\mu_1-\mu_2=0$  
+
+$H_a:\mu_1-\mu_2\neq 0$.
+
+$\mu_1-\mu_2$, estimated by $\bar x_1-\bar x_2$.
+:::
+-->
+
 :::
 
 ## The two-sample $t$-test {.compact-theory}
@@ -280,7 +315,11 @@ $$
 . . .
 
 ::: {.thinkbox}
-$S_p^2$ pools the within-group variation into one estimate of a common $\sigma^2$. Keep an eye on it: in ANOVA the same quantity reappears as $MSE$.
+$S_p^2$ is the **pooled standard deviation**. 
+It measures the the within-group variation into one estimate of a common $\sigma^2$. 
+
+Remember this, we see a similar measurement in ANOVA, 
+which is the mean square error ($MSE$).
 :::
 
 ## Example: does caffeine raise pulse rate? {.code-slide}
@@ -313,7 +352,7 @@ Strong evidence that $\mu_1-\mu_2>0$.
 <div class="live-r-cell" id="cell-ttest"><div class="live-r-toolbar"><button onclick="runLiveRCell('ttest')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">x <- c(17, 22, 21, 16, 6, -2, 27, 15, 16, 20)   # caffeinated
 y <- c(4, 10, 7, -9, 5, 4, 5, 7, 6, 12)         # decaf
 
-t.test(x, y, alternative = "greater")</textarea><div class="live-r-output" id="output-ttest">Click Run code.</div></div>
+t.test(x, y, alternative = "two.sided")</textarea><div class="live-r-output" id="output-ttest">Click Run code.</div></div>
 ```
 
 ::: {.thinkbox}
@@ -354,7 +393,7 @@ Two populations need one test. With $d\ge 3$ populations there are $d(d-1)/2$ pa
 
 ## The F distribution {.compact-theory}
 
-The **F distribution** is a family of continuous probability distributions named after R. A. Fisher.
+The **F-distribution** is a family of continuous probability distributions named after R. A. Fisher.
 
 ::: {.three-col .compact-cards}
 ::: {.card}
@@ -379,20 +418,20 @@ Use `df()`, `pf()`, `qf()`, and `rf()`.
 
 ::: {.thinkbox}
 <!-- In ANOVA, the F distribution is the reference distribution for the ratio $MSF/MSE$. -->
-In ANOVA, the F distribution is the reference distribution for the ratio of the variation explained by the factor to the unexplained variation (MSF/MSE).
+In ANOVA, the F distribution is the reference distribution for the ratio of the variation explained by a *factor* to the unexplained variation (MSF/MSE).
 :::
 
 <!-- --- 
 
 
-## F-distribution probability calculator {.compact-theory}
+## F distribution probability calculator {.compact-theory}
 -->
 
 
 . . .
 
 
-<h5> F-distribution probability calculator </h5>
+**F distribution probability calculator**
 
 <!-- Use the app below to calculate left-tail or right-tail probabilities from an $F(df_1,df_2)$ distribution. -->
 
@@ -404,20 +443,31 @@ In ANOVA, the F distribution is the reference distribution for the ratio of the 
 
 **Analysis of Variance (ANOVA)** is used to compare several population means at once.
 
+<!-- ::: {.two-col .compact-cards} -->
+
 ::: {.two-col .compact-cards}
+
+::: {.stat-card}
+<span class="label">Factor and levels</span>
+A **factor** is a categorical variable. 
+
+Its **levels** are the specific categories (or groups) within it.
+:::
+
 ::: {.stat-card}
 <span class="label">Setting</span>
 
-There are $d\ge 3$ groups or factor levels.
+ANOVA is appropriate to compare group means when there are $d\ge 3$ groups or factor levels.
 :::
 
 
-
+<!--
 ::: {.stat-card}
 <span class="label">Global question</span>
 
 Do all groups have the same population mean?
 :::
+-->
 
 <!--
 ::: {.stat-card}
@@ -433,7 +483,11 @@ If the global test rejects, compare pairs carefully.
 . . .
 
 
+
+
 ::: {.defbox}
+<span class="label">Global quesion</span>
+Do all groups have the same population mean?
 $$
 H_0:\mu_1=\mu_2=\cdots=\mu_d.
 $$
@@ -447,21 +501,16 @@ $$
 <!-- In ANOVA, the F distribution is the reference distribution for the ratio $MSF/MSE$. -->
 Why does the procedure change so much? Why not compare all pairs?
 
-
-
-$$
-\begin{array}{rcl}
+$$ \begin{array}{rcl}
 \mu_1 & = & \mu_2 \\
 \mu_1 & = & \mu_3 \\
-\mu_1 & = & \mu_4 \\
       & \vdots & \\
 \mu_1 & = & \mu_d
 \end{array}
 \qquad
 \begin{array}{rcl}
 \mu_2 & = & \mu_3 \\
-\mu_2 & = & \mu_4 \\
-      & \vdots & \\
+      & \vdots &  \\
 \mu_2 & = & \mu_d \\
 \hfill\\
 \end{array}
@@ -473,8 +522,7 @@ $$
 \hfill\\
 \hfill\\
 \hfill\\
-\hfill\\
-\end{array}
+\end{array} 
 $$
 :::
 
@@ -484,11 +532,17 @@ $$
 <!-- pause -->
 . . .
 
-- With 2 groups, there is only one difference between means to test.
-- With 3 or more groups, there are multiple possible differences. Repeated $t$-tests increase the chance of false positives.
+- With 2 groups $\longrightarrow$ only one difference between means to test.
+- With 3 or more groups $\longrightarrow$ multiple possible differences. Repeated $t$-tests increase the chance of false positives.
 - ANOVA solves this by testing all group means together using between-group vs. within-group variation.
 
-
+<!-- 
+::: {.incremental}
+- With 2 groups, there is only one difference between means to test.
+- With 3 or more groups, ...
+- ANOVA solves this by ...
+:::
+-->
 
 
 ---
@@ -500,20 +554,20 @@ ANOVA (Analysis of Variance) compares several population means at once. Suppose 
 The one-factor ANOVA model is
 
 $$
-Y_{ik}=\mu+\tau_i+\epsilon_{ik}, \qquad \epsilon_{ik}\sim N(0,\sigma^2).
+Y_{ik}=\mu+\alpha_i+\epsilon_{ik}, \qquad \epsilon_{ik}\sim N(0,\sigma^2).
 $$
 
 Equivalently,
 
 $$
 Y_{ik}=\mu_i+\epsilon_{ik}, \qquad \epsilon_{ik}\sim N(0,\sigma^2),
-\qquad \mu_i=\mu+\tau_i.
+\qquad \mu_i=\mu+\alpha_i.
 $$
 
 ::: {.model-defs .model-defs-wide}
 - $Y_{ik}$: response for observation $k$ in group $i$
 - $\mu$: overall mean
-- $\tau_i$: effect for group $i$
+- $\alpha_i$: effect for group $i$
 - $\epsilon_{ik}$: random error
 - $\mu_i$: mean for group $i$
 - $\sigma^2$: common variance
@@ -525,7 +579,7 @@ The model assumes independent errors, approximate normality within groups, and a
 
 ---
 
-## Overall mean and sources of variation {.compact-theory .overall-variation-slide}
+## Sources of variation {.compact-theory .overall-variation-slide}
 
 ::: {.overall-variation-layout}
 ::: {.overall-table-top}
@@ -536,17 +590,38 @@ The model assumes independent errors, approximate normality within groups, and a
 | Observation 2 | $Y_{12}$ | $Y_{22}$ | $\cdots$ | $Y_{d2}$ |
 | $\vdots$ | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ |
 | Observation $n_i$ | $Y_{1n_1}$ | $Y_{2n_2}$ | $\cdots$ | $Y_{dn_d}$ |
-| Mean | $\bar Y_1$ | $\bar Y_2$ | $\cdots$ | $\bar Y_d$ |
-| Sample variance | $S_1^2$ | $S_2^2$ | $\cdots$ | $S_d^2$ |
-| Sample size | $n_1$ | $n_2$ | $\cdots$ | $n_d$ |
+| Mean (of each group) | $\bar Y_1$ | $\bar Y_2$ | $\cdots$ | $\bar Y_d$ |
+| Sample variance (of each group) | $S_1^2$ | $S_2^2$ | $\cdots$ | $S_d^2$ |
+| Sample size (of each group) | $n_1$ | $n_2$ | $\cdots$ | $n_d$ |
 :::
 
+<!--
 ::: {.mini-note .center}
 $\bar Y_i$, $S_i^2$, and $n_i$ are the sample mean, sample variance, and sample size for group $i$.
 :::
+-->
+
 :::
 
 ::: {.overall-mid-grid}
+
+::: {.variation-cell}
+<span class="mini-title">Sample mean for each group</span>
+$$
+\hat{\mu}_i = \bar{Y}_{i} = \frac{1}{n_i} \sum_{k=1}^{n_i} Y_{ik}, 
+  \quad i=1 \ldots d
+$$
+:::
+::: {.variation-cell}
+<span class="mini-title">Sample variance of each group</span>
+$$
+{\hat{\sigma}_i}^{2} 
+  = {S_{i}}^2 
+  = \frac{1}{n_i} \sum_{k=1}^{n_i} (Y_{ik} - \bar{Y}_{i})^2, 
+  \quad i=1 \ldots d
+$$
+:::
+
 ::: {.variation-cell}
 <span class="mini-title">Total sample size</span>
 $$
@@ -579,10 +654,17 @@ $$
 
 ::: {.variation-total}
 <span class="mini-title">Total source of variation</span>
+
+<!--
 $$
 SST=SSF+SSE,
 \qquad
 SST=\sum_{i=1}^{d}\sum_{k=1}^{n_i}(Y_{ik}-\bar Y)^2
+$$
+-->
+
+$$
+SST = SSF+SSE =\sum_{i=1}^{d}\sum_{k=1}^{n_i}(Y_{ik}-\bar Y)^2
 $$
 :::
 :::
@@ -650,7 +732,37 @@ Large values of $F^*$ mean the between-level mean square is large relative to th
 
 ---
 
-## Illustrative example: brush-turkeys at UQ {.compact-theory}
+## Illustrative example: Some famous residents at UQ {.compact-theory}
+
+. . .
+
+![](../images/incubation_scene.png){.rounded .example-photo width="48%" fig-align="center"}
+
+::: {.mini-note .center}
+UQ Brush Turkeys, *Alectura lathami* (AI Generated image)
+:::
+
+
+. . .
+
+::: {.defbox}
+<span class="label">Summary</span>
+
+- Study: Eiby and Booth (2009), *Journal of Comparative Physiology B*.
+
+- Researchers: Yvonne A. Eiby and David T. Booth, School of Biological Sciences, The University of Queensland.
+
+- Eggs came from brush-turkeys breeding on UQ's St Lucia campus.
+:::
+
+. . .
+
+::: {.callout}
+Note: the original data was not available. We reconstructed a representative dataset from the values published in Eiby and Booth (2009).
+:::
+
+<!--
+---
 
 ::: {.two-col-wide .example-photo-slide}
 ::: {.col}
@@ -658,44 +770,75 @@ Large values of $F^*$ mean the between-level mean square is large relative to th
 - Researchers: Yvonne A. Eiby and David T. Booth, School of Biological Sciences, The University of Queensland.
 - Eggs came from brush-turkeys breeding on UQ's St Lucia campus.
 
+<!--
 ::: {.callout}
 A local UQ example makes ANOVA feel like a scientific modelling tool rather than a table-only procedure.
 :::
+- ->
+
 :::
 ::: {.col}
 ![](../images/incubation_scene.png){.rounded .example-photo width="100%"}
 :::
 :::
+-->
 
+<!--
 ---
+-->
 
 ## Research question and variables {.compact-theory}
 
-::: {.two-col}
-::: {.col}
 ::: {.defbox}
 <span class="label">Research question</span>
 
 Does incubation temperature affect the mean incubation period of Australian Brush-turkey eggs?
 :::
 
+. . .
+
+- 41 freshly laid eggs were collected from Brush-turkey mounds at UQ, St Lucia over three breeding seasons (2004–2007).
+- Eggs were collected immediately after laying, measured, and randomly assigned to 32°C, 34°C, or 36°C incubation treatments.
+- 28 eggs were included in the incubation-period ANOVA comparing the three temperature groups (determined by the degrees of freedom of the F statistic).
+- These temperatures represent low, moderate, and high typical mound temperatures.
+<!--
+natural mound temperatures can range from about 25–40°C, but are usually 32–36°C during incubation.
+- Mean incubation periods were 51.4 days at 32°C, 46.7 days at 34°C, and 45.6 days at 36°C.
+-->
+
+. . .
+
+::: {.two-col}
+<!-- ::: {.col} 
+::: {.defbox}
+<span class="label">Research question</span>
+
+Does incubation temperature affect the mean incubation period of Australian Brush-turkey eggs?
+:::
+-->
+
 ::: {.stat-card}
 <span class="label">Factor levels</span>
 
-32 °C, 34 °C, 36 °C.
+32°C, 34°C, 36°C.
 :::
-:::
-::: {.col}
+<!-- ::: -->
+
+<!-- ::: {.col} -->
+
+<!--
 ![](../images/uq_campus_illustration.png){.rounded width="100%"}
+-->
 
 ::: {.stat-card}
 <span class="label">Response</span>
 
 Incubation period in days.
 :::
-:::
+<!-- ::: -->
 :::
 
+<!--
 ---
 
 ## Data provenance: be transparent {.compact-theory}
@@ -711,6 +854,37 @@ Reference: Eiby, Y. A., & Booth, D. T. (2009). The effects of incubation tempera
 :::
 
 ---
+-->
+
+## Summary Statistics by Factor Level
+
+::: {.handcalc-grid style="margin-top: 2.0rem;"}
+<!-- ::: {.handcalc-summary} -->
+| Group | $n_i$ | $\bar y_i$ | $s_i^2$ |
+|:---:|---:|---:|---:|
+| 32°C | 10 | 51.400 | 1.600 |
+| 34°C | 10 | 46.700 | 1.567 |
+| 36°C | 8 | 45.625 | 6.554 |
+:::
+
+
+::: {.thinkbox style="margin-top: 2.0rem;"}
+**Note (Transparency):** The data are reconstructed integer incubation periods that reproduce the published group means and standard deviations. 
+The individual measurements for each egg used in this example are not the authors' original observations.
+:::
+
+
+. . .
+
+- The original paper this example is based on can be accessed from the UQ library website [here](https://search.library.uq.edu.au/permalink/61UQ_INST/1gcujru/cdi_fao_agris_US201301681308){.purple-link}.
+- The original paper is related to Eiby's PhD theses available from UQ eSpace [here](https://espace.library.uq.edu.au/view/UQ:205501){.purple-link}.
+
+
+
+
+
+
+
 
 ## First look: boxplots before the test {.code-slide}
 
@@ -782,7 +956,7 @@ Since $d=3$ and $n=28$, the reference distribution is $F(2,25)$ under $H_0$.
 
 ---
 
-## Hand calculation: p-value {.handcalc-slide}
+## P-value and interpretation {.handcalc-slide}
 
 $$
 \begin{aligned}
@@ -796,8 +970,22 @@ $$
 <div id="brush-pvalue-plot" class="pvalue-plot"></div>
 
 ::: {.warnbox}
-Conclusion: reject $H_0$ at conventional significance levels. Mean incubation period is not the same for all temperatures.
+Conclusion: The evidence suggests there is strong evidence against $H_0$. 
+The results of the ANOVA suggest the mean incubation period is not the same for all temperatures.
+
+**However**, we should keep in mind we have relatively small sample sizes.
 :::
+
+<!--
+::: {.card}
+The ANOVA provides strong evidence that mean incubation period differs by incubation temperature. The colder 32 °C group takes about five more days than the warmer groups.
+:::
+
+::: {.thinkbox}
+The $F$ test answers whether there is evidence of any mean difference. Tukey comparisons help translate that into the scientific story: 32 °C differs from the warmer groups, while 34 °C and 36 °C are much closer.
+:::
+-->
+
 
 ---
 
@@ -887,38 +1075,7 @@ summary_stats</textarea>
 </div>
 ```
 
----
-
-## Post hoc comparisons in R {.code-slide}
-
-ANOVA tells us whether some mean differs. Tukey comparisons help identify the pairs.
-
-```{=html}
-<div class="live-r-cell" id="cell-tukey"><div class="live-r-toolbar"><button onclick="runLiveRCell('tukey')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">brush_turkey <- read.csv("incubation_data.csv")
-names(brush_turkey)[names(brush_turkey) == "incubation_period"] <- "incubation_days"
-brush_turkey$temperature <- factor(brush_turkey$temperature, levels = c(32, 34, 36))
-fit <- aov(incubation_days ~ temperature, data = brush_turkey)
-
-TukeyHSD(fit)</textarea><div class="live-r-output" id="output-tukey">Click Run code.</div></div>
-```
-
----
-
-## Assumption and robustness checks {.code-slide}
-
-```{=html}
-<div class="live-r-cell" id="cell-robust"><div class="live-r-toolbar"><button onclick="runLiveRCell('robust')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">brush_turkey <- read.csv("incubation_data.csv")
-names(brush_turkey)[names(brush_turkey) == "incubation_period"] <- "incubation_days"
-brush_turkey$temperature <- factor(brush_turkey$temperature, levels = c(32, 34, 36))
-fit <- aov(incubation_days ~ temperature, data = brush_turkey)
-
-shapiro.test(residuals(fit))
-oneway.test(incubation_days ~ temperature, data = brush_turkey, var.equal = FALSE)
-kruskal.test(incubation_days ~ temperature, data = brush_turkey)</textarea><div class="live-r-output" id="output-robust">Click Run code.</div></div>
-```
-
----
-
+<!--
 ## Interpretation {.compact-theory}
 
 ::: {.card}
@@ -926,12 +1083,13 @@ The ANOVA provides strong evidence that mean incubation period differs by incuba
 :::
 
 ::: {.thinkbox}
-The omnibus F-test answers whether there is evidence of any mean difference. Tukey comparisons help translate that into the scientific story: 32 °C differs from the warmer groups, while 34 °C and 36 °C are much closer.
+The $F$ test answers whether there is evidence of any mean difference. Tukey comparisons help translate that into the scientific story: 32 °C differs from the warmer groups, while 34 °C and 36 °C are much closer.
 :::
+-->
 
 ---
 
-## Takeaway {.compact-theory .takeaway-slide}
+## Wrap up {.compact-theory .takeaway-slide}
 
 1. The F distribution gives the reference curve for a mean-square ratio.
 2. One-factor ANOVA compares several means with a single omnibus test.
@@ -1443,6 +1601,7 @@ async function getUqWebR(){
 
 async function evaluateRCodeToText(webR, userCode){
   const helper = `local({
+    options(width = 200)
     .expr <- parse(text = user_code)
     .warnings <- character()
     .out <- withCallingHandlers(
@@ -1591,3 +1750,48 @@ if (window.Reveal && typeof window.Reveal.on === 'function') {
 }
 </script>
 ```
+
+---
+
+
+## Next time and some things to think about {.compact-theory .nexttime-slide}
+
+1. Work out another example to reinforce concept.
+2. If we reject the null hypothesis in ANOVA and determine at least one mean is different, which mean or means are different?
+3. Can you think of applications of ANOVA outside this example?
+4. Was the research conducted in the study ethical?
+ 
+
+
+
+---
+
+## Post hoc comparisons in R {.code-slide}
+
+ANOVA tells us whether some mean differs. Tukey comparisons help identify the pairs.
+
+```{=html}
+<div class="live-r-cell" id="cell-tukey"><div class="live-r-toolbar"><button onclick="runLiveRCell('tukey')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">brush_turkey <- read.csv("incubation_data.csv")
+names(brush_turkey)[names(brush_turkey) == "incubation_period"] <- "incubation_days"
+brush_turkey$temperature <- factor(brush_turkey$temperature, levels = c(32, 34, 36))
+fit <- aov(incubation_days ~ temperature, data = brush_turkey)
+
+TukeyHSD(fit)</textarea><div class="live-r-output" id="output-tukey">Click Run code.</div></div>
+```
+
+---
+
+## Assumption and robustness checks {.code-slide}
+
+```{=html}
+<div class="live-r-cell" id="cell-robust"><div class="live-r-toolbar"><button onclick="runLiveRCell('robust')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">brush_turkey <- read.csv("incubation_data.csv")
+names(brush_turkey)[names(brush_turkey) == "incubation_period"] <- "incubation_days"
+brush_turkey$temperature <- factor(brush_turkey$temperature, levels = c(32, 34, 36))
+fit <- aov(incubation_days ~ temperature, data = brush_turkey)
+
+shapiro.test(residuals(fit))
+oneway.test(incubation_days ~ temperature, data = brush_turkey, var.equal = FALSE)
+kruskal.test(incubation_days ~ temperature, data = brush_turkey)</textarea><div class="live-r-output" id="output-robust">Click Run code.</div></div>
+```
+
+---
