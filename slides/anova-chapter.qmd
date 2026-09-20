@@ -591,9 +591,9 @@ The model assumes independent errors, approximate normality within groups, and a
 | Observation 2 | $Y_{12}$ | $Y_{22}$ | $\cdots$ | $Y_{d2}$ |
 | $\vdots$ | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ |
 | Observation $n_i$ | $Y_{1n_1}$ | $Y_{2n_2}$ | $\cdots$ | $Y_{dn_d}$ |
-| Mean (of each group) | $\bar Y_1$ | $\bar Y_2$ | $\cdots$ | $\bar Y_d$ |
-| Sample variance (of each group) | $S_1^2$ | $S_2^2$ | $\cdots$ | $S_d^2$ |
-| Sample size (of each group) | $n_1$ | $n_2$ | $\cdots$ | $n_d$ |
+| Mean (each group) | $\bar Y_1$ | $\bar Y_2$ | $\cdots$ | $\bar Y_d$ |
+| Sample variance (each group) | $S_1^2$ | $S_2^2$ | $\cdots$ | $S_d^2$ |
+| Sample size (each group) | $n_1$ | $n_2$ | $\cdots$ | $n_d$ |
 :::
 
 <!--
