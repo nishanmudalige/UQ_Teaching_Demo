@@ -365,15 +365,15 @@ S_p^2=\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}
 </div>
 </div>
 </section>
-<section id="example-does-caffeine-raise-pulse-rate" class="slide level2 code-slide">
-<h2>Example: does caffeine raise pulse rate?</h2>
-<p>Change in pulse rate (bpm) for two independent groups.</p>
+<section id="example-sodium-in-australian-vs-new-zealand-pies" class="slide level2 code-slide">
+<h2>Example: sodium in Australian vs New Zealand pies</h2>
+<p>Sodium content (mg per 100 g) for two small convenience samples of meat pies sold in Australia and New Zealand.</p>
 <div class="two-col">
 <div class="col">
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Group</th>
+<th style="text-align: left;">Market</th>
 <th style="text-align: right;"><span class="math inline">\(n_i\)</span></th>
 <th style="text-align: right;"><span class="math inline">\(\bar x_i\)</span></th>
 <th style="text-align: right;"><span class="math inline">\(s_i^2\)</span></th>
@@ -381,37 +381,44 @@ S_p^2=\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Caffeinated</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">15.800</td>
-<td style="text-align: right;">69.289</td>
+<td style="text-align: left;">Australia</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">414.75</td>
+<td style="text-align: right;">4224.917</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Decaf</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">5.100</td>
-<td style="text-align: right;">31.211</td>
+<td style="text-align: left;">New Zealand</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">406.50</td>
+<td style="text-align: right;">1889.667</td>
 </tr>
 </tbody>
 </table>
-<p>Observed difference: <span class="math inline">\(\bar x_1-\bar x_2=10.7\)</span> bpm.</p>
+<p>Observed difference: <span class="math inline">\(\bar x_1-\bar x_2=8.25\)</span> mg/100 g.</p>
 </div>
 <div class="col">
 <div class="stat-card">
 <p><span class="label">Results</span></p>
-<p>Welch: <span class="math inline">\(t=3.375\)</span>, <span class="math inline">\(\nu=15.74\)</span>, <span class="math inline">\(p=0.0020\)</span>.</p>
-<p>Pooled: <span class="math inline">\(t=3.375\)</span>, <span class="math inline">\(\mathrm{df}=18\)</span>, <span class="math inline">\(p=0.0017\)</span>.</p>
-<p>Strong evidence that <span class="math inline">\(\mu_1-\mu_2&gt;0\)</span>.</p>
+<p>Welch: <span class="math inline">\(t=0.211\)</span>, <span class="math inline">\(\nu=5.24\)</span>, <span class="math inline">\(p=0.8408\)</span>.</p>
+<p>Pooled: <span class="math inline">\(t=0.211\)</span>, <span class="math inline">\(\mathrm{df}=6\)</span>, <span class="math inline">\(p=0.8399\)</span>.</p>
+<p>These selected products provide little evidence of a difference in mean sodium content.</p>
 </div>
 </div>
 </div>
-<div class="live-r-cell" id="cell-ttest"><div class="live-r-toolbar"><button onclick="runLiveRCell('ttest')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">x &lt;- c(17, 22, 21, 16, 6, -2, 27, 15, 16, 20)   # caffeinated
-y &lt;- c(4, 10, 7, -9, 5, 4, 5, 7, 6, 12)         # decaf
+<div class="mini-note center">
+<p><strong>Sources:</strong> Australia — <a href="https://www.coles.com.au/product/coles-frozen-meat-pies-4-pack-700g-5181729">Coles</a>, <a href="https://www.woolworths.com.au/shop/productdetails/96118/woolworths-meat-pies">Woolworths</a>, <a href="https://www.coles.com.au/product/national-pies-classic-beef-pie-180g-413179">National Pies</a>, <a href="https://fourntwenty.com.au/products/angus-beef-pies-1">Four’N Twenty</a>.<br>
+New Zealand — <a href="https://www.newworld.co.nz/shop/product/5103706-ea-000?name=bake-shack-mince-pie">Bake Shack</a>, <a href="https://www.newworld.co.nz/shop/product/5045335-ea-000?name=oxford-pies-mince-pie">Oxford Mince</a>, <a href="https://www.paknsave.co.nz/shop/product/5022829_ea_000pns?name=westie-mini-mince-pie">Westie</a>, <a href="https://www.newworld.co.nz/shop/product/5023585_ea_000nw?name=oxford-pies-steak-pie">Oxford Steak</a>. Nutrition panels accessed September 2026.</p>
+</div>
+<div class="live-r-cell" id="cell-ttest"><div class="live-r-toolbar"><button onclick="runLiveRCell('ttest')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">AU &lt;- c(348, 370, 471, 470)   # Australia: Coles, Woolworths, National Pies, Four'N Twenty
+NZ &lt;- c(470, 399, 376, 381)   # New Zealand: Bake Shack, Oxford Mince, Westie, Oxford Steak
 
-t.test(x, y, alternative = "two.sided")</textarea><div class="live-r-output" id="output-ttest">Click Run code.</div></div>
-<div class="thinkbox">
-<p>Two populations need one test. With <span class="math inline">\(d\ge 3\)</span> populations there are <span class="math inline">\(d(d-1)/2\)</span> pairwise differences: the gap ANOVA fills.</p>
-</div>
+t.test(AU, NZ, alternative = "two.sided")
+</textarea><div class="live-r-output" id="output-ttest">Click Run code.</div></div>
+<!--
+::: {.thinkbox}
+Two populations need one test. With $d\ge 3$ populations there are $d(d-1)/2$ pairwise differences: the gap ANOVA fills.
+:::
+-->
 <!--
 ---
 

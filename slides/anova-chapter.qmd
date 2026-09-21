@@ -323,42 +323,50 @@ Remember this, we see a similar measurement in ANOVA,
 which is the mean square error ($MSE$).
 :::
 
-## Example: does caffeine raise pulse rate? {.code-slide}
+## Example: sodium in Australian vs New Zealand pies {.code-slide}
 
-Change in pulse rate (bpm) for two independent groups.
+Sodium content (mg per 100 g) for two small convenience samples of meat pies sold in Australia and New Zealand.
 
 ::: {.two-col}
 ::: {.col}
-| Group | $n_i$ | $\bar x_i$ | $s_i^2$ |
+| Market | $n_i$ | $\bar x_i$ | $s_i^2$ |
 |:---|---:|---:|---:|
-| Caffeinated | 10 | 15.800 | 69.289 |
-| Decaf | 10 | 5.100 | 31.211 |
+| Australia | 4 | 414.75 | 4224.917 |
+| New Zealand | 4 | 406.50 | 1889.667 |
 
-Observed difference: $\bar x_1-\bar x_2=10.7$ bpm.
+Observed difference: $\bar x_1-\bar x_2=8.25$ mg/100 g.
 :::
 ::: {.col}
 ::: {.stat-card}
 <span class="label">Results</span>
 
-Welch: $t=3.375$, $\nu=15.74$, $p=0.0020$.
+Welch: $t=0.211$, $\nu=5.24$, $p=0.8408$.
 
-Pooled: $t=3.375$, $\mathrm{df}=18$, $p=0.0017$.
+Pooled: $t=0.211$, $\mathrm{df}=6$, $p=0.8399$.
 
-Strong evidence that $\mu_1-\mu_2>0$.
+These selected products provide little evidence of a difference in mean sodium content.
 :::
 :::
+:::
+
+::: {.mini-note .center}
+**Sources:** Australia — [Coles](https://www.coles.com.au/product/coles-frozen-meat-pies-4-pack-700g-5181729), [Woolworths](https://www.woolworths.com.au/shop/productdetails/96118/woolworths-meat-pies), [National Pies](https://www.coles.com.au/product/national-pies-classic-beef-pie-180g-413179), [Four'N Twenty](https://fourntwenty.com.au/products/angus-beef-pies-1).  
+New Zealand — [Bake Shack](https://www.newworld.co.nz/shop/product/5103706-ea-000?name=bake-shack-mince-pie), [Oxford Mince](https://www.newworld.co.nz/shop/product/5045335-ea-000?name=oxford-pies-mince-pie), [Westie](https://www.paknsave.co.nz/shop/product/5022829_ea_000pns?name=westie-mini-mince-pie), [Oxford Steak](https://www.newworld.co.nz/shop/product/5023585_ea_000nw?name=oxford-pies-steak-pie). Nutrition panels accessed September 2026.
 :::
 
 ```{=html}
-<div class="live-r-cell" id="cell-ttest"><div class="live-r-toolbar"><button onclick="runLiveRCell('ttest')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">x <- c(17, 22, 21, 16, 6, -2, 27, 15, 16, 20)   # caffeinated
-y <- c(4, 10, 7, -9, 5, 4, 5, 7, 6, 12)         # decaf
+<div class="live-r-cell" id="cell-ttest"><div class="live-r-toolbar"><button onclick="runLiveRCell('ttest')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">AU <- c(348, 370, 471, 470)   # Australia: Coles, Woolworths, National Pies, Four'N Twenty
+NZ <- c(470, 399, 376, 381)   # New Zealand: Bake Shack, Oxford Mince, Westie, Oxford Steak
 
-t.test(x, y, alternative = "two.sided")</textarea><div class="live-r-output" id="output-ttest">Click Run code.</div></div>
+t.test(AU, NZ, alternative = "two.sided")
+</textarea><div class="live-r-output" id="output-ttest">Click Run code.</div></div>
 ```
 
+<!--
 ::: {.thinkbox}
 Two populations need one test. With $d\ge 3$ populations there are $d(d-1)/2$ pairwise differences: the gap ANOVA fills.
 :::
+-->
 
 
 

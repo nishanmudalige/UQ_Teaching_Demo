@@ -208,5 +208,12 @@
     "title": "One-way ANOVA",
     "section": "Example Continued …",
     "text": "Example Continued …\n\n\n\n\nOriginal: Nicola Sockhill (@nicolasockhill), iNaturalist Australia, Obs 144651230.\n\n\n\n\n\nOriginal: Conrad (@conrad54177), iNaturalist Australia, Obs 375187971.\n\n\n\n\n\nUQ Library (2024) [Photograph]. Facebook. Facebook post\n\n\n\n\n\nEdward Varnes (@eddiewoodwardo), iNaturalist Australia, Obs 334183685.\n\n\n\n\nView some sightings of UQ’s Brush Turkeys here, and read an interesting article about them here."
+  },
+  {
+    "objectID": "slides/anova-chapter.html#example-sodium-in-australian-vs-new-zealand-pies",
+    "href": "slides/anova-chapter.html#example-sodium-in-australian-vs-new-zealand-pies",
+    "title": "One-way ANOVA",
+    "section": "Example: sodium in Australian vs New Zealand pies",
+    "text": "Example: sodium in Australian vs New Zealand pies\nSodium content (mg per 100 g) for two small convenience samples of meat pies sold in Australia and New Zealand.\n\n\n\n\n\nMarket\n\\(n_i\\)\n\\(\\bar x_i\\)\n\\(s_i^2\\)\n\n\n\n\nAustralia\n4\n414.75\n4224.917\n\n\nNew Zealand\n4\n406.50\n1889.667\n\n\n\nObserved difference: \\(\\bar x_1-\\bar x_2=8.25\\) mg/100 g.\n\n\n\nResults\nWelch: \\(t=0.211\\), \\(\\nu=5.24\\), \\(p=0.8408\\).\nPooled: \\(t=0.211\\), \\(\\mathrm{df}=6\\), \\(p=0.8399\\).\nThese selected products provide little evidence of a difference in mean sodium content.\n\n\n\n\nSources: Australia — Coles, Woolworths, National Pies, Four’N Twenty.\nNew Zealand — Bake Shack, Oxford Mince, Westie, Oxford Steak. Nutrition panels accessed September 2026.\n\nRun codeR runs in the browser. First run may take a moment.AU &lt;- c(348, 370, 471, 470)   # Australia: Coles, Woolworths, National Pies, Four'N Twenty\nNZ &lt;- c(470, 399, 376, 381)   # New Zealand: Bake Shack, Oxford Mince, Westie, Oxford Steak\n\nt.test(AU, NZ, alternative = \"two.sided\")\nClick Run code."
   }
 ]
