@@ -571,11 +571,11 @@ Y_{ik}=\mu_i+\epsilon_{ik}, \qquad \epsilon_{ik}\sim N(0,\sigma^2),
 <li><span class="math inline">\(\alpha_i\)</span>: effect for group <span class="math inline">\(i\)</span></li>
 <li><span class="math inline">\(\epsilon_{ik}\)</span>: random error</li>
 <li><span class="math inline">\(\mu_i\)</span>: mean for group <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(\sigma^2\)</span>: common variance</li>
+<li><span class="math inline">\(\sigma^2\)</span>: <strong>common variance</strong></li>
 </ul>
 </div>
 <div class="thinkbox">
-<p>The model assumes independent errors, approximate normality within groups, and a common variance across groups.</p>
+<p>The model assumes independent errors, approximate normality within groups, and a <strong>common variance across groups</strong>.</p>
 </div>
 </section>
 <section id="sources-of-variation" class="slide level2 compact-theory overall-variation-slide">
@@ -687,7 +687,8 @@ n=n_1+n_2+\cdots+n_d
 </div>
 <div class="variation-cell">
 <p><span class="mini-title">Within groups: error variation</span> <span class="math display">\[
-SSE=\sum_{i=1}^{d}(n_i-1)S_i^2
+SSE = \sum_{i=1}^{d}\sum_{k=1}^{n_i}
+(Y_{ik}-\bar{Y}_{i})^2 = \sum_{i=1}^{d}(n_i-1)S_i^2
 \]</span></p>
 </div>
 <div class="variation-cell">
@@ -749,6 +750,9 @@ SST = SSF+SSE =\sum_{i=1}^{d}\sum_{k=1}^{n_i}(Y_{ik}-\bar Y)^2
 </table>
 <div class="table-gap">
 
+</div>
+<div class="thinkbox">
+<p>The <span class="math inline">\(MSE\)</span> is the estimate of the<strong>common variance across groups</strong>.</p>
 </div>
 <div class="defbox full-width-block">
 <p><span class="label">Hypotheses</span></p>
@@ -1094,8 +1098,8 @@ brush_turkey$temperature &lt;- factor(brush_turkey$temperature, levels = c(32, 3
 
 aggregate(incubation_days ~ temperature, data = brush_turkey, summary)</textarea><div class="live-r-output" id="output-box">Click Run code.</div></div>
 </section>
-<section id="hand-calculation-summaries-sums-of-squares-and-f-statistic" class="slide level2 handcalc-slide handcalc-combined">
-<h2>Hand calculation: summaries, sums of squares, and F statistic</h2>
+<section id="calculations-summaries-sums-of-squares-and-f-statistic" class="slide level2 handcalc-slide handcalc-combined">
+<h2>Calculations: summaries, sums of squares, and F statistic</h2>
 <div class="handcalc-grid">
 <div class="handcalc-summary">
 <p><span class="label">Group summaries</span></p>
@@ -1136,6 +1140,7 @@ aggregate(incubation_days ~ temperature, data = brush_turkey, summary)</textarea
 <p><span class="math display">\[
 \bar y=\frac{10(51.400)+10(46.700)+8(45.625)}{28}=48.071.
 \]</span></p>
+<p>There are <span class="math inline">\(d = 3\)</span> groups.</p>
 </div>
 <div class="handcalc-work">
 <p><span class="label">Sums of squares</span></p>
@@ -1154,16 +1159,58 @@ SSF&amp;=\sum_{i=1}^{3}n_i(\bar y_i-\bar y)^2 \\
 \]</span></p>
 </div>
 </div>
-<div class="anova-stat-row">
-<p><span class="math display">\[
+<!--
+::: {.anova-stat-row}
+$$
 MSF=\frac{SSF}{d-1}=\frac{177.482}{2}=88.741,
 \qquad
 MSE=\frac{SSE}{n-d}=\frac{74.375}{25}=2.975
-\]</span></p>
-<p><span class="math display">\[
-F^*=\frac{MSF}{MSE}=\frac{88.741}{2.975}=29.829.
-\]</span></p>
-</div>
+\qquad
+F^*=\frac{MSF}{MSE}=\frac{88.741}{2.975}=29.829.\\
+$$
+:::
+-->
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">SS</th>
+<th style="text-align: right;">MS</th>
+<th style="text-align: right;"><span class="math inline">\(F\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factor</td>
+<td style="text-align: right;"><span class="math inline">\(d-1=2\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SSF=177.482\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MSF=\dfrac{SSF}{d-1}=\dfrac{177.482}{2}=88.741\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(\dfrac{MSF}{MSE}=\dfrac{88.741}{2.975}=29.829\)</span></td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td style="text-align: right;"><span class="math inline">\(n-d=25\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SSE=74.375\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MSE=\dfrac{SSE}{n-d}=\dfrac{74.375}{25}=2.975\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;"><span class="math inline">\(n-1=27\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SST=SSF+SSE=251.857\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
 <div class="thinkbox">
 <p>Since <span class="math inline">\(d=3\)</span> and <span class="math inline">\(n=28\)</span>, the reference distribution is <span class="math inline">\(F(2,25)\)</span> under <span class="math inline">\(H_0\)</span>.</p>
 </div>
