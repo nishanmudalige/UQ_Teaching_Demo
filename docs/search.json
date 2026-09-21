@@ -39,7 +39,7 @@
     "href": "slides/anova-chapter.html#the-f-distribution",
     "title": "One-way ANOVA",
     "section": "The F distribution",
-    "text": "The F distribution\nThe F-distribution is a family of continuous probability distributions named after R. A. Fisher.\n\n\nFamily notation\nWe write \\(F(df_1,df_2)\\).\n\n\nTwo degrees of freedom\n\n\\(df_1\\): numerator df; \\(df_2\\) denominator df.\n\n\nR functions\nUse df(), pf(), qf(), and rf().\n\n\n\n\nIn ANOVA, the F distribution is the reference distribution for the ratio of the variation explained by a factor to the unexplained variation (MSF/MSE).\n\n\n\nF distribution probability calculator"
+    "text": "The F distribution\nThe F distribution is a family of continuous probability distributions named after R. A. Fisher.\n\n\nFamily notation\nWe write \\(F(df_1,df_2)\\).\n\n\nTwo degrees of freedom\n\n\\(df_1\\): numerator df; \\(df_2\\) denominator df.\n\n\nR functions\nUse df(), pf(), qf(), and rf().\n\n\n\n\nIn ANOVA, the F distribution is the reference distribution for the ratio of the variation explained by a factor to the unexplained variation (MSF/MSE).\n\n\n\nF distribution probability calculator"
   },
   {
     "objectID": "slides/anova-chapter.html#why-anova",
@@ -60,7 +60,7 @@
     "href": "slides/anova-chapter.html#sources-of-variation",
     "title": "One-way ANOVA",
     "section": "Sources of variation",
-    "text": "Sources of variation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGroup 1\nGroup 2\n\\(\\cdots\\)\nGroup \\(d\\)\n\n\n\n\nObservation 1\n\\(Y_{11}\\)\n\\(Y_{21}\\)\n\\(\\cdots\\)\n\\(Y_{d1}\\)\n\n\nObservation 2\n\\(Y_{12}\\)\n\\(Y_{22}\\)\n\\(\\cdots\\)\n\\(Y_{d2}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\ddots\\)\n\\(\\vdots\\)\n\n\nObservation \\(n_i\\)\n\\(Y_{1n_1}\\)\n\\(Y_{2n_2}\\)\n\\(\\cdots\\)\n\\(Y_{dn_d}\\)\n\n\nMean (each group)\n\\(\\bar Y_1\\)\n\\(\\bar Y_2\\)\n\\(\\cdots\\)\n\\(\\bar Y_d\\)\n\n\nSample variance (each group)\n\\(S_1^2\\)\n\\(S_2^2\\)\n\\(\\cdots\\)\n\\(S_d^2\\)\n\n\nSample size (each group)\n\\(n_1\\)\n\\(n_2\\)\n\\(\\cdots\\)\n\\(n_d\\)\n\n\n\n\n\n\n\n\nSample mean for each group \\[\n\\hat{\\mu}_i = \\bar{Y}_{i} = \\frac{1}{n_i} \\sum_{k=1}^{n_i} Y_{ik},\n  \\quad i=1 \\ldots d\n\\]\n\n\nSample variance of each group \\[\n{\\hat{\\sigma}_i}^{2}\n  = {S_{i}}^2\n  = \\frac{1}{n_i} \\sum_{k=1}^{n_i} (Y_{ik} - \\bar{Y}_{i})^2,\n  \\quad i=1 \\ldots d\n\\]\n\n\nTotal sample size \\[\nn=n_1+n_2+\\cdots+n_d\n\\]\n\n\nOverall mean \\[\n\\bar Y=\\frac{1}{n}\\sum_{i=1}^{d}\\sum_{k=1}^{n_i}Y_{ik}\n=\\frac{1}{n}\\sum_{i=1}^{d}n_i\\bar Y_i\n\\]\n\n\nWithin groups: error variation \\[\nSSE=\\sum_{i=1}^{d}(n_i-1)S_i^2\n\\]\n\n\nBetween groups: factor variation \\[\nSSF=\\sum_{i=1}^{d}n_i(\\bar Y_i-\\bar Y)^2\n\\]\n\n\n\nTotal source of variation\n\n\\[\nSST = SSF+SSE =\\sum_{i=1}^{d}\\sum_{k=1}^{n_i}(Y_{ik}-\\bar Y)^2\n\\]"
+    "text": "Sources of variation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGroup 1\nGroup 2\n\\(\\cdots\\)\nGroup \\(d\\)\n\n\n\n\nObservation 1\n\\(Y_{11}\\)\n\\(Y_{21}\\)\n\\(\\cdots\\)\n\\(Y_{d1}\\)\n\n\nObservation 2\n\\(Y_{12}\\)\n\\(Y_{22}\\)\n\\(\\cdots\\)\n\\(Y_{d2}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\ddots\\)\n\\(\\vdots\\)\n\n\nObservation \\(n_i\\)\n\\(Y_{1n_1}\\)\n\\(Y_{2n_2}\\)\n\\(\\cdots\\)\n\\(Y_{dn_d}\\)\n\n\nMean (each group)\n\\(\\bar Y_1\\)\n\\(\\bar Y_2\\)\n\\(\\cdots\\)\n\\(\\bar Y_d\\)\n\n\nSample variance (each group)\n\\(S_1^2\\)\n\\(S_2^2\\)\n\\(\\cdots\\)\n\\(S_d^2\\)\n\n\nSample size (each group)\n\\(n_1\\)\n\\(n_2\\)\n\\(\\cdots\\)\n\\(n_d\\)\n\n\n\n\n\n\n\n\nSample mean for each group \\[\n\\hat{\\mu}_i = \\bar{Y}_{i} = \\frac{1}{n_i} \\sum_{k=1}^{n_i} Y_{ik},\n  \\quad i=1 \\ldots d\n\\]\n\n\nSample variance of each group \\[\n{\\hat{\\sigma}_i}^{2}\n  = {S_{i}}^2\n  = \\frac{1}{n_i - 1} \\sum_{k=1}^{n_i} (Y_{ik} - \\bar{Y}_{i})^2,\n  \\quad i=1 \\ldots d\n\\]\n\n\nTotal sample size \\[\nn=n_1+n_2+\\cdots+n_d\n\\]\n\n\nOverall mean \\[\n\\bar Y=\\frac{1}{n}\\sum_{i=1}^{d}\\sum_{k=1}^{n_i}Y_{ik}\n=\\frac{1}{n}\\sum_{i=1}^{d}n_i\\bar Y_i\n\\]\n\n\nWithin groups: error variation \\[\nSSE=\\sum_{i=1}^{d}(n_i-1)S_i^2\n\\]\n\n\nBetween groups: factor variation \\[\nSSF=\\sum_{i=1}^{d}n_i(\\bar Y_i-\\bar Y)^2\n\\]\n\n\n\nTotal source of variation\n\n\\[\nSST = SSF+SSE =\\sum_{i=1}^{d}\\sum_{k=1}^{n_i}(Y_{ik}-\\bar Y)^2\n\\]"
   },
   {
     "objectID": "slides/anova-chapter.html#anova-table-and-hypothesis-test",
@@ -88,7 +88,7 @@
     "href": "slides/anova-chapter.html#illustrative-example-some-famous-residents-at-uq",
     "title": "One-way ANOVA",
     "section": "Illustrative example: Some famous residents at UQ",
-    "text": "Illustrative example: Some famous residents at UQ\n\n\n\n\n\n\n\nUQ Brush Turkeys, Alectura lathami (AI Generated image)\n\n\n\n\nSummary\n\nStudy: Eiby and Booth (2009), Journal of Comparative Physiology B.\nResearchers: Yvonne A. Eiby and David T. Booth, School of Biological Sciences, The University of Queensland.\nEggs came from brush-turkeys breeding on UQ’s St Lucia campus.\n\n\n\n\n\n\n\nNote: the original data was not available. We reconstructed a representative dataset from the values published in Eiby and Booth (2009)."
+    "text": "Illustrative example: Some famous residents at UQ\n\n\n\n\n\n\n\n\n\nUQ Brush Turkeys, Alectura lathami. Photo: Charles Wilson (@omichromium), iNaturalist Australia, Obs 401472008.\n\n\n\n\nSummary\n\nStudy: Eiby and Booth (2009), Journal of Comparative Physiology B.\nResearchers: Yvonne A. Eiby and David T. Booth, School of Biological Sciences, The University of Queensland.\nEggs came from brush-turkeys breeding on UQ’s St Lucia campus.\n\n\n\n\n\n\n\nNote: the original data was not available. We reconstructed a representative dataset from the values published in Eiby and Booth (2009)."
   },
   {
     "objectID": "slides/anova-chapter.html#research-question-and-variables",
@@ -158,7 +158,7 @@
     "href": "slides/anova-chapter.html#next-time-and-some-things-to-think-about",
     "title": "One-way ANOVA",
     "section": "Next time and some things to think about",
-    "text": "Next time and some things to think about\n\nWork out another example to reinforce concept.\nIf we reject the null hypothesis in ANOVA and determine at least one mean is different, which mean or means are different?\nCan you think of applications of ANOVA outside this example?\nWas the research conducted in the study ethical?"
+    "text": "Next time and some things to think about\n\nWork out another example to reinforce concept.\nIf we reject the null hypothesis in ANOVA and determine at least one mean is different, which mean or means are different?\nCan you think of applications of ANOVA outside this example?\nWas the research conducted in the study ethical?\n\n\nThinking Ahead:\nThe next slides have some R blocks that can be examined in preparation for us to answer some of these questions."
   },
   {
     "objectID": "slides/anova-chapter.html#post-hoc-comparisons-in-r",
@@ -187,5 +187,26 @@
     "title": "One-way ANOVA",
     "section": "",
     "text": "One-way ANOVA\nThis chapter introduces the F distribution and one-way ANOVA, including an illustrative example using data related to some famous UQ residents.\nOpen the interactive slides\nDownload the CSV dataset\nLearning goals:\n\nIdentify the response and factor\nInterpret an ANOVA table \nCheck assumptions using reproducible R code.\n\nBack to home"
+  },
+  {
+    "objectID": "slides/anova-chapter.html#optional-post-hoc-comparisons-in-r",
+    "href": "slides/anova-chapter.html#optional-post-hoc-comparisons-in-r",
+    "title": "One-way ANOVA",
+    "section": "[Optional] Post hoc comparisons in R",
+    "text": "[Optional] Post hoc comparisons in R\nANOVA tells us whether some mean differs. Tukey comparisons help identify the pairs.\nRun codeR runs in the browser. First run may take a moment.brush_turkey &lt;- read.csv(\"incubation_data.csv\")\nnames(brush_turkey)[names(brush_turkey) == \"incubation_period\"] &lt;- \"incubation_days\"\nbrush_turkey$temperature &lt;- factor(brush_turkey$temperature, levels = c(32, 34, 36))\nfit &lt;- aov(incubation_days ~ temperature, data = brush_turkey)\n\nTukeyHSD(fit)Click Run code."
+  },
+  {
+    "objectID": "slides/anova-chapter.html#optional-assumption-and-robustness-checks",
+    "href": "slides/anova-chapter.html#optional-assumption-and-robustness-checks",
+    "title": "One-way ANOVA",
+    "section": "[Optional] Assumption and robustness checks",
+    "text": "[Optional] Assumption and robustness checks\nRun codeR runs in the browser. First run may take a moment.brush_turkey &lt;- read.csv(\"incubation_data.csv\")\nnames(brush_turkey)[names(brush_turkey) == \"incubation_period\"] &lt;- \"incubation_days\"\nbrush_turkey$temperature &lt;- factor(brush_turkey$temperature, levels = c(32, 34, 36))\nfit &lt;- aov(incubation_days ~ temperature, data = brush_turkey)\n\nshapiro.test(residuals(fit))\noneway.test(incubation_days ~ temperature, data = brush_turkey, var.equal = FALSE)\nkruskal.test(incubation_days ~ temperature, data = brush_turkey)Click Run code."
+  },
+  {
+    "objectID": "slides/anova-chapter.html#example-continued",
+    "href": "slides/anova-chapter.html#example-continued",
+    "title": "One-way ANOVA",
+    "section": "Example Continued …",
+    "text": "Example Continued …\n\n\n\n\nOriginal: Nicola Sockhill (@nicolasockhill), iNaturalist Australia, Obs 144651230.\n\n\n\n\n\nOriginal: Conrad (@conrad54177), iNaturalist Australia, Obs 375187971.\n\n\n\n\n\nUQ Library (2024) [Photograph]. Facebook. Facebook post\n\n\n\n\n\nEdward Varnes (@eddiewoodwardo), iNaturalist Australia, Obs 334183685.\n\n\n\n\nView some sightings of UQ’s Brush Turkeys here, and read an interesting article about them here."
   }
 ]

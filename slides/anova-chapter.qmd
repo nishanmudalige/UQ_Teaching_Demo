@@ -394,7 +394,7 @@ Two populations need one test. With $d\ge 3$ populations there are $d(d-1)/2$ pa
 
 ## The F distribution {.compact-theory}
 
-The **F-distribution** is a family of continuous probability distributions named after R. A. Fisher.
+The **F distribution** is a family of continuous probability distributions named after R. A. Fisher.
 
 ::: {.three-col .compact-cards}
 ::: {.card}
@@ -618,7 +618,7 @@ $$
 $$
 {\hat{\sigma}_i}^{2} 
   = {S_{i}}^2 
-  = \frac{1}{n_i} \sum_{k=1}^{n_i} (Y_{ik} - \bar{Y}_{i})^2, 
+  = \frac{1}{n_i - 1} \sum_{k=1}^{n_i} (Y_{ik} - \bar{Y}_{i})^2, 
   \quad i=1 \ldots d
 $$
 :::
@@ -836,11 +836,24 @@ Large values of $F^*$ mean the between-level mean square is large relative to th
 
 . . .
 
+<!--
 ![](../images/incubation_scene.png){.rounded .example-photo width="48%" fig-align="center"}
+-->
 
+![](../images/bt_uq.jpg){.rounded .example-photo width="48%" fig-align="center"}
+
+<!--
 ::: {.mini-note .center}
 UQ Brush Turkeys, *Alectura lathami* (AI Generated image)
 :::
+-->
+
+::: {.mini-note .center}
+UQ Brush Turkeys, *Alectura lathami*.
+Photo: Charles Wilson (@omichromium), iNaturalist Australia,
+[Obs 401472008](https://inaturalist.ala.org.au/observations/401472008){target="_blank"}.
+:::
+
 
 
 . . .
@@ -886,6 +899,61 @@ A local UQ example makes ANOVA feel like a scientific modelling tool rather than
 <!--
 ---
 -->
+
+## Example Continued ... {.compact-theory}
+
+:::: {style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem 1.1rem; width: 82%; margin: 0 auto 0.6rem auto;"}
+
+::: {style="text-align: center;"}
+![](../images/bt_walk.jpg){.rounded style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"}
+
+::: {.mini-note .center}
+Original: Nicola Sockhill (@nicolasockhill), iNaturalist Australia,
+[Obs 144651230](https://inaturalist.ala.org.au/observations/144651230){target="_blank"}.
+:::
+:::
+
+::: {style="text-align: center;"}
+![](../images/bt_grass.jpg){.rounded style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"}
+
+::: {.mini-note .center}
+Original: Conrad (@conrad54177), iNaturalist Australia,
+[Obs 375187971](https://inaturalist.ala.org.au/observations/375187971){target="_blank"}.
+:::
+:::
+
+::: {style="text-align: center;"}
+![](../images/bt_library.jpg){.rounded style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"}
+
+::: {.mini-note .center}
+UQ Library (2024) [Photograph]. Facebook. 
+[Facebook post](https://www.facebook.com/uniofqldlibrary/posts/occasionally-students-at-uq-have-the-privilege-of-observing-the-majestic-alectur/1203788070941291/){target="_blank"}
+:::
+:::
+
+::: {style="text-align: center;"}
+![](../images/bt_chips.jpg){.rounded style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"}
+
+::: {.mini-note .center}
+Edward Varnes (@eddiewoodwardo), iNaturalist Australia,
+[Obs 334183685](https://inaturalist.ala.org.au/observations/334183685){target="_blank"}.
+:::
+:::
+
+::::
+
+
+::: {.defbox}
+View some sightings of UQ's Brush Turkeys [here](https://inaturalist.ala.org.au/observations?subview=map&taxon_id=2038&swlat=-27.5045&swlng=153.0045&nelat=-27.4915&nelng=153.0220){target="_blank"},
+and read an interesting article about them [here](https://stories.uq.edu.au/shorthand-uq/small-change/dont-let-the-brush-turkeys-get-you-down/){target="_blank"}.
+:::
+
+<!--
+::: {.thinkbox}
+You can read an interesting article on UQ's Brush Turkeys [here](https://stories.uq.edu.au/shorthand-uq/small-change/dont-let-the-brush-turkeys-get-you-down/){target="_blank"}
+:::
+-->
+---
 
 ## Research question and variables {.compact-theory}
 
@@ -1943,10 +2011,18 @@ if (window.Reveal && typeof window.Reveal.on === 'function') {
  
 
 
+::: {.warnbox}
+**Thinking Ahead:**
+
+The next slides have some R blocks that can be examined in preparation for us to answer some of these questions.
+:::
+
+
+
 
 ---
 
-## Post hoc comparisons in R {.code-slide}
+## [Optional] Post hoc comparisons in R {.code-slide}
 
 ANOVA tells us whether some mean differs. Tukey comparisons help identify the pairs.
 
@@ -1961,7 +2037,7 @@ TukeyHSD(fit)</textarea><div class="live-r-output" id="output-tukey">Click Run c
 
 ---
 
-## Assumption and robustness checks {.code-slide}
+## [Optional] Assumption and robustness checks {.code-slide}
 
 ```{=html}
 <div class="live-r-cell" id="cell-robust"><div class="live-r-toolbar"><button onclick="runLiveRCell('robust')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">brush_turkey <- read.csv("incubation_data.csv")

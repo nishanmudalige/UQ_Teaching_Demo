@@ -430,7 +430,7 @@ t.test(x, y, alternative = "two.sided")</textarea><div class="live-r-output" id=
 </section>
 <section id="the-f-distribution" class="slide level2 compact-theory">
 <h2>The F distribution</h2>
-<p>The <strong>F-distribution</strong> is a family of continuous probability distributions named after R. A. Fisher.</p>
+<p>The <strong>F distribution</strong> is a family of continuous probability distributions named after R. A. Fisher.</p>
 <div class="three-col compact-cards">
 <div class="card">
 <p><span class="label">Family notation</span></p>
@@ -663,7 +663,7 @@ $\bar Y_i$, $S_i^2$, and $n_i$ are the sample mean, sample variance, and sample 
 <p><span class="mini-title">Sample variance of each group</span> <span class="math display">\[
 {\hat{\sigma}_i}^{2}
   = {S_{i}}^2
-  = \frac{1}{n_i} \sum_{k=1}^{n_i} (Y_{ik} - \bar{Y}_{i})^2,
+  = \frac{1}{n_i - 1} \sum_{k=1}^{n_i} (Y_{ik} - \bar{Y}_{i})^2,
   \quad i=1 \ldots d
 \]</span></p>
 </div>
@@ -875,13 +875,21 @@ p\text{-value}=P\{F(d-1,n-d)\ge F^*\}.
 <section id="illustrative-example-some-famous-residents-at-uq" class="slide level2 compact-theory">
 <h2>Illustrative example: Some famous residents at UQ</h2>
 <div class="fragment">
+<!--
+![](../images/incubation_scene.png){.rounded .example-photo width="48%" fig-align="center"}
+-->
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/incubation_scene.png" class="rounded example-photo quarto-figure quarto-figure-center" style="width:48.0%"></p>
+<p><img data-src="../images/bt_uq.jpg" class="rounded example-photo quarto-figure quarto-figure-center" style="width:48.0%"></p>
 </figure>
 </div>
+<!--
+::: {.mini-note .center}
+UQ Brush Turkeys, *Alectura lathami* (AI Generated image)
+:::
+-->
 <div class="mini-note center">
-<p>UQ Brush Turkeys, <em>Alectura lathami</em> (AI Generated image)</p>
+<p>UQ Brush Turkeys, <em>Alectura lathami</em>. Photo: Charles Wilson (<span class="citation" data-cites="omichromium">@omichromium</span>), iNaturalist Australia, <a href="https://inaturalist.ala.org.au/observations/401472008" target="_blank">Obs 401472008</a>.</p>
 </div>
 </div>
 <div class="fragment">
@@ -927,6 +935,43 @@ A local UQ example makes ANOVA feel like a scientific modelling tool rather than
 ---
 -->
 </div>
+</section>
+<section id="example-continued" class="slide level2 compact-theory">
+<h2>Example Continued …</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem 1.1rem; width: 82%; margin: 0 auto 0.6rem auto;">
+<div style="text-align: center;">
+<p><img data-src="../images/bt_walk.jpg" class="rounded" style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"></p>
+<div class="mini-note center">
+<p>Original: Nicola Sockhill (<span class="citation" data-cites="nicolasockhill">@nicolasockhill</span>), iNaturalist Australia, <a href="https://inaturalist.ala.org.au/observations/144651230" target="_blank">Obs 144651230</a>.</p>
+</div>
+</div>
+<div style="text-align: center;">
+<p><img data-src="../images/bt_grass.jpg" class="rounded" style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"></p>
+<div class="mini-note center">
+<p>Original: Conrad (<span class="citation" data-cites="conrad54177">@conrad54177</span>), iNaturalist Australia, <a href="https://inaturalist.ala.org.au/observations/375187971" target="_blank">Obs 375187971</a>.</p>
+</div>
+</div>
+<div style="text-align: center;">
+<p><img data-src="../images/bt_library.jpg" class="rounded" style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"></p>
+<div class="mini-note center">
+<p>UQ Library (2024) [Photograph]. Facebook. <a href="https://www.facebook.com/uniofqldlibrary/posts/occasionally-students-at-uq-have-the-privilege-of-observing-the-majestic-alectur/1203788070941291/" target="_blank">Facebook post</a></p>
+</div>
+</div>
+<div style="text-align: center;">
+<p><img data-src="../images/bt_chips.jpg" class="rounded" style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"></p>
+<div class="mini-note center">
+<p>Edward Varnes (<span class="citation" data-cites="eddiewoodwardo">@eddiewoodwardo</span>), iNaturalist Australia, <a href="https://inaturalist.ala.org.au/observations/334183685" target="_blank">Obs 334183685</a>.</p>
+</div>
+</div>
+</div>
+<div class="defbox">
+<p>View some sightings of UQ’s Brush Turkeys <a href="https://inaturalist.ala.org.au/observations?subview=map&amp;taxon_id=2038&amp;swlat=-27.5045&amp;swlng=153.0045&amp;nelat=-27.4915&amp;nelng=153.0220" target="_blank">here</a>, and read an interesting article about them <a href="https://stories.uq.edu.au/shorthand-uq/small-change/dont-let-the-brush-turkeys-get-you-down/" target="_blank">here</a>.</p>
+</div>
+<!--
+::: {.thinkbox}
+You can read an interesting article on UQ's Brush Turkeys [here](https://stories.uq.edu.au/shorthand-uq/small-change/dont-let-the-brush-turkeys-get-you-down/){target="_blank"}
+:::
+-->
 </section>
 <section id="research-question-and-variables" class="slide level2 compact-theory">
 <h2>Research question and variables</h2>
@@ -1964,9 +2009,13 @@ if (window.Reveal && typeof window.Reveal.on === 'function') {
 <li>Can you think of applications of ANOVA outside this example?</li>
 <li>Was the research conducted in the study ethical?</li>
 </ol>
+<div class="warnbox">
+<p><strong>Thinking Ahead:</strong></p>
+<p>The next slides have some R blocks that can be examined in preparation for us to answer some of these questions.</p>
+</div>
 </section>
-<section id="post-hoc-comparisons-in-r" class="slide level2 code-slide">
-<h2>Post hoc comparisons in R</h2>
+<section id="optional-post-hoc-comparisons-in-r" class="slide level2 code-slide">
+<h2>[Optional] Post hoc comparisons in R</h2>
 <p>ANOVA tells us whether some mean differs. Tukey comparisons help identify the pairs.</p>
 <div class="live-r-cell" id="cell-tukey"><div class="live-r-toolbar"><button onclick="runLiveRCell('tukey')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">brush_turkey &lt;- read.csv("incubation_data.csv")
 names(brush_turkey)[names(brush_turkey) == "incubation_period"] &lt;- "incubation_days"
@@ -1975,8 +2024,8 @@ fit &lt;- aov(incubation_days ~ temperature, data = brush_turkey)
 
 TukeyHSD(fit)</textarea><div class="live-r-output" id="output-tukey">Click Run code.</div></div>
 </section>
-<section id="assumption-and-robustness-checks" class="slide level2 code-slide">
-<h2>Assumption and robustness checks</h2>
+<section id="optional-assumption-and-robustness-checks" class="slide level2 code-slide">
+<h2>[Optional] Assumption and robustness checks</h2>
 <div class="live-r-cell" id="cell-robust"><div class="live-r-toolbar"><button onclick="runLiveRCell('robust')">Run code</button><span class="live-r-status">R runs in the browser. First run may take a moment.</span></div><textarea class="live-r-code" spellcheck="false">brush_turkey &lt;- read.csv("incubation_data.csv")
 names(brush_turkey)[names(brush_turkey) == "incubation_period"] &lt;- "incubation_days"
 brush_turkey$temperature &lt;- factor(brush_turkey$temperature, levels = c(32, 34, 36))
