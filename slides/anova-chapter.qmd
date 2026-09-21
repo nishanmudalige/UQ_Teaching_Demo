@@ -316,7 +316,7 @@ $$
 . . .
 
 ::: {.thinkbox}
-$S_p^2$ is the **pooled standard deviation**. 
+$S_p^2$ is the **pooled variance**. 
 It measures the the within-group variation into one estimate of a common $\sigma^2$. 
 
 Remember this, we see a similar measurement in ANOVA, 
