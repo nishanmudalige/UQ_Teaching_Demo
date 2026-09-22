@@ -948,7 +948,7 @@ UQ Library (2024) [Photograph]. Facebook.
 ![](../images/bt_chips.jpg){.rounded style="width: 100%; max-height: 23vh; object-fit: cover; display: block; margin: 0 auto 0.15rem auto;"}
 
 ::: {.mini-note .center}
-Edward Varnes (@eddiewoodwardo), iNaturalist Australia,
+[AI Enhanced] Original: Edward Varnes (@eddiewoodwardo), iNaturalist Australia,
 [Obs 334183685](https://inaturalist.ala.org.au/observations/334183685){target="_blank"}.
 :::
 :::
